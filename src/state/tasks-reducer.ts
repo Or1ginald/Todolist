@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {tasksType} from "../AppWithReducers";
+import {tasksType, taskType} from "../App";
 import {
     addToDoListACType,
     deleteToDoListACType,
@@ -25,21 +25,35 @@ type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
 type addTaskACType = ReturnType<typeof addTaskAC>
 /*------------Types---------------*/
 
+// type taskType = {
+//     description: string
+//     title: string
+//     completed: boolean
+//     status:number
+//     priority: number
+//     startDate: required(datetime)
+//     deadline: required(datetime)
+//     id: required(string)
+//     todoListId: required(string)
+//     order: required(integer)
+//     addedDate: required(datetime)
+// }
+
 const initialState: tasksType = {
-    // [ToDoListId1]: [
-    //     {id: v1(), title: "HTML&CSS", isDone: true},
-    //     {id: v1(), title: "JS", isDone: true},
-    //     {id: v1(), title: "ReactJS", isDone: false},
-    //     {id: v1(), title: "Rest API", isDone: false},
-    //     {id: v1(), title: "GraphQL", isDone: false},
-    // ],
-    // [ToDoListId2]: [
-    //     {id: v1(), title: "HTML&CSS2", isDone: true},
-    //     {id: v1(), title: "JS2", isDone: true},
-    //     {id: v1(), title: "ReactJS2", isDone: false},
-    //     {id: v1(), title: "Rest API2", isDone: false}, m
-    //     {id: v1(), title: "GraphQL2", isDone: false},
-    // ]
+    [ToDoListId1]: [
+        {id: v1(), title: "HTML&CSS", isDone: true},
+        {id: v1(), title: "JS", isDone: true},
+        {id: v1(), title: "ReactJS", isDone: false},
+        {id: v1(), title: "Rest API", isDone: false},
+        {id: v1(), title: "GraphQL", isDone: false},
+    ],
+    [ToDoListId2]: [
+        {id: v1(), title: "HTML&CSS2", isDone: true},
+        {id: v1(), title: "JS2", isDone: true},
+        {id: v1(), title: "ReactJS2", isDone: false},
+        {id: v1(), title: "Rest API2", isDone: false},
+        {id: v1(), title: "GraphQL2", isDone: false},
+    ]
 }
 
 export const tasksReducer = (state: tasksType = initialState, action: mainActionType): tasksType => {
@@ -126,4 +140,5 @@ export const addTaskAC = (todolistId: string, title: string) => {
         title,
     } as const
 }
+export const setTasksAC = (tasks: Array<taskType>)=> {}
 /*------------Action Creators---------------*/

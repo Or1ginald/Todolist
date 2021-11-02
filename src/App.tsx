@@ -16,7 +16,7 @@ export type tasksType = {
     [key: string]: taskType[]
 }
 
-const AppWithReducers = React.memo(() => {
+export const App = React.memo(() => {
     const dispatch = useDispatch()
     const toDoLists = useSelector<rootReducerType, Array<ToDoListsType>>(store => store.toDoLists)
     const tasks = useSelector<rootReducerType, tasksType>(store => store.tasks)
@@ -78,4 +78,3 @@ const AppWithReducers = React.memo(() => {
     );
 })
 
-export default AppWithReducers;

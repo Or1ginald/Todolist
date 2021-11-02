@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {taskType} from "../AppWithReducers";
+import {taskType} from "../App";
 import {InputPlusButton} from "./InputPlusButton";
 import {ChangeText} from "./ChangeText";
 import {addTaskAC} from "../state/tasks-reducer";
@@ -11,6 +11,7 @@ import {
     deleteToDoListAC,
     deleteToDoListTC,
     editToDoListTitleAC,
+    editToDoListTitleTC,
     filterType
 } from "../state/todolists-reducer";
 
@@ -44,7 +45,7 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
     }, [dispatch])
 
     const editToDoListTitle = useCallback((title: string) => {
-        dispatch(editToDoListTitleAC(props.toDoListId, title))
+        dispatch(editToDoListTitleTC(props.toDoListId, title))
     }, [dispatch, props.toDoListId])
     /*-------Functions--------*/
     let tasksList = props.tasks;

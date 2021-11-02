@@ -101,7 +101,16 @@ export const addToDoListTC = (title: string) => (dispatch: Dispatch) => {
     todolistAPI.createTodolist(title)
         .then(res => dispatch(addToDoListAC(title)))
 }
-// export const deleteToDoListTC = (dispatch: Dispatch) => {}
+export const editToDoListTitleTC = (toDoListId: string, title: string) => (dispatch: Dispatch) => {
+    todolistAPI.updateTodolist(toDoListId, title)
+        .then(res=>{
+            if(res.data.resultCode===0){
+                dispatch(editToDoListTitleAC(toDoListId, title))
+            } else {
+                console.log("todolist editing error")
+            }
+        })
+}
 // export const deleteToDoListTC = (dispatch: Dispatch) => {}
 
 /*-------------Thunk Creators----------------*/
