@@ -1,4 +1,5 @@
 import axios from "axios";
+import {taskType} from "../state/tasks-reducer";
 
 export type TodolistType = {
     id: string
@@ -7,11 +8,18 @@ export type TodolistType = {
     title: string
 }
 
-type ResponseType<D={} > = {
+type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
     fieldsErrors: Array<string>
     data: D
+}
+
+
+type getTasksResponseType = {
+    error: string,
+    totalCount: number,
+    items: Array<taskType>
 }
 
 const instance = axios.create({
@@ -35,15 +43,16 @@ export const todolistAPI = {
     updateTodolist(todolistId: string, title: string) {
         return instance.put<ResponseType>(`todo-lists/${todolistId}`, {title})
     },
-    getTasks(todolistId: string){
-        return instance.get(`todo-lists/${todolistId}/tasks`)
+    getTasks(todolistId: string) {
+        return instance.get<getTasksResponseType>(`todo-lists/${todolistId}/tasks`)
     },
-    createTask(todolistId: string, title: string){
+    createTask(todolistId: string, title: string) {
         return instance.post(`todo-lists/${todolistId}/tasks`, {title})
     },
-    deleteTask(todolistId: string, taskId: string){
+    deleteTask(todolistId: string, taskId: string) {
         return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
-    updateTask(){},
+    updateTask() {
+    },
 
 }

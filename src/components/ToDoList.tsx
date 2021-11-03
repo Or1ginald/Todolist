@@ -1,8 +1,7 @@
-import React, {useCallback} from "react";
-import {taskType} from "../App";
+import React, {useCallback, useEffect} from "react";
 import {InputPlusButton} from "./InputPlusButton";
 import {ChangeText} from "./ChangeText";
-import {addTaskAC} from "../state/tasks-reducer";
+import {addTaskAC, setTasksTC, taskType} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 import {Task} from "./Task";
 // import {rootReducerType} from "../state/store";
@@ -25,6 +24,9 @@ type ToDoListPropsType = {
 export const ToDoList = React.memo((props: ToDoListPropsType) => {
 
     // const tasks = useSelector<rootReducerType, tasksType>(store => store.tasks)
+    useEffect(()=>{
+        dispatch(setTasksTC(props.toDoListId))
+    },[])
 
     /*-------Functions--------*/
     const dispatch = useDispatch()
@@ -50,10 +52,10 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
     /*-------Functions--------*/
     let tasksList = props.tasks;
     if (props.filter === "Completed") {
-        tasksList = props.tasks.filter(e => e.isDone)
+        tasksList = props.tasks.filter(e => e.completed)
     }
     if (props.filter === "Active") {
-        tasksList = props.tasks.filter(e => !e.isDone)
+        tasksList = props.tasks.filter(e => !e.completed)
     }
     return <div>
         <h3>
@@ -62,7 +64,7 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
         </h3>
         <InputPlusButton addCallBack={addTask}/>
         <ul>
-            {tasksList.map(e => <Task id={e.id} isDone={e.isDone} title={e.title} key={e.id}
+            {tasksList.map(e => <Task id={e.id} isDone={e.completed} title={e.title} key={e.id}
                                       toDoListId={props.toDoListId}/>)}
         </ul>
         <div>

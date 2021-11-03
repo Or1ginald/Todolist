@@ -9,12 +9,12 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "./state/store";
 import {todolistAPI} from "./api/todolists-api";
+import {tasksType} from "./state/tasks-reducer";
 
-export type taskType = { id: string, title: string, isDone: boolean }
-
-export type tasksType = {
-    [key: string]: taskType[]
-}
+//
+// export type tasksType = {
+//     [key: string]: taskType[]
+// }
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
