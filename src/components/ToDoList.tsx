@@ -1,15 +1,13 @@
 import React, {useCallback, useEffect} from "react";
 import {InputPlusButton} from "./InputPlusButton";
 import {ChangeText} from "./ChangeText";
-import {addTaskAC, setTasksTC, taskType} from "../state/tasks-reducer";
+import {addTaskTC, setTasksTC, taskType} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 import {Task} from "./Task";
 // import {rootReducerType} from "../state/store";
 import {
     changeToDoListFilterAC,
-    deleteToDoListAC,
     deleteToDoListTC,
-    editToDoListTitleAC,
     editToDoListTitleTC,
     filterType
 } from "../state/todolists-reducer";
@@ -40,7 +38,7 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
         dispatch(deleteToDoListTC(toDoListId))
     }, [dispatch])
     const addTask = useCallback((title: string) => {
-        dispatch(addTaskAC(props.toDoListId, title))
+        dispatch(addTaskTC(props.toDoListId, title))
     }, [dispatch, props.toDoListId])
     const changeFilter = useCallback((toDoListId: string, newFilter: filterType) => {
         dispatch(changeToDoListFilterAC(toDoListId, newFilter))

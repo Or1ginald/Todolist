@@ -1,14 +1,12 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 import './App.css';
 import {ToDoList} from "./components/ToDoList";
 import {InputPlusButton} from "./components/InputPlusButton";
-import {
-    addToDoListAC, addToDoListTC, setTodosAC, setTodosTC, ToDoListsType,
+import {addToDoListTC, setTodosTC, ToDoListsType,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "./state/store";
-import {todolistAPI} from "./api/todolists-api";
 import {tasksType} from "./state/tasks-reducer";
 
 //

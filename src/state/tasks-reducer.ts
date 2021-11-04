@@ -1,11 +1,7 @@
-import {v1} from "uuid";
 import {
     addToDoListACType,
     deleteToDoListACType,
-    setTodosAC,
     setTodosACType,
-    ToDoListId1,
-    ToDoListId2
 } from "./todolists-reducer";
 import {Dispatch} from "redux";
 import {todolistAPI} from "../api/todolists-api";
@@ -101,12 +97,12 @@ export const tasksReducer = (state: tasksType = initialState, action: mainAction
                 } : e)
             }
         }
-        // case "ADD-TASK": {
-        //     return {
-        //         ...state,
-        //         [action.todolistId]: [{id: v1(), title: action.title, isDone: false}, ...state[action.todolistId]]
-        //     }
-        // }
+        case "ADD-TASK": {
+            return {
+                ...state,
+                [action.todolistId]: [action.task, ...state[action.todolistId]]
+            }
+        }
         case "ADD-TODOLIST": {
             return {...state, [action.todolistID]: []}
         }
@@ -146,11 +142,11 @@ export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: b
         isDone,
     } as const
 }
-export const addTaskAC = (todolistId: string, title: string) => {
+export const addTaskAC = (todolistId: string, task: taskType) => {
     return {
         type: "ADD-TASK",
         todolistId,
-        title,
+        task,
     } as const
 }
 export const setTasksAC = (tasks: Array<taskType>, todolistId: string) => {
@@ -163,9 +159,20 @@ export const setTasksAC = (tasks: Array<taskType>, todolistId: string) => {
 /*------------Action Creators---------------*/
 //thunks
 export const setTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
-    // @ts-ignore
     todolistAPI.getTasks(todolistId).then(res => {
         dispatch(setTasksAC(res.data.items, todolistId))
     });
-
+}
+export const deleteTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch) => {
+    todolistAPI.deleteTask(todolistId, taskId)
+        .then(res => {
+            dispatch(deleteTaskAC(todolistId, taskId))
+        })
+}
+export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
+    todolistAPI.createTask(todolistId, title)
+        .then(res => {
+            dispatch(addTaskAC(todolistId, res.data.data.item))
+            console.log(res)
+        })
 }

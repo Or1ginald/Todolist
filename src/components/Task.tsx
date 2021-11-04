@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {ChangeText} from "./ChangeText";
-import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "../state/tasks-reducer";
+import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskTC} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 
 
@@ -24,7 +24,7 @@ export const Task = React.memo((props: TaskPropsType) => {
         dispatch(changeTaskTitleAC(props.toDoListId, props.id, title))
     }, [dispatch, props.toDoListId, props.id])
     const deleteTask = () => {
-        dispatch(deleteTaskAC(props.toDoListId, props.id))
+        dispatch(deleteTaskTC(props.toDoListId, props.id))
     }
     return (
         <li key={id}>
