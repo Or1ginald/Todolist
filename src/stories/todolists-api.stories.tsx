@@ -92,11 +92,11 @@ export const CreateTask = () => {
 export const DeleteTask = () => {
     const [taskID, setTaskID] = useState<any>("")
     const [todolistID, setTodolistID] = useState<string>("")
-    const [responceStaus, setResponceStatus] = useState<any>({})
+    const [responseStatus, setResponseStatus] = useState<any>({})
     const onClickHandler = () => {
-        return todolistAPI.deleteTask(todolistID, taskID).then(res => setResponceStatus(res.data))
+        return todolistAPI.deleteTask(todolistID, taskID).then(res => setResponseStatus(res.data))
     }
-    const requestResult = responceStaus.resultCode === 0 ? "Запрос выполнен" : "Что-то пошло не так"
+    const requestResult = responseStatus.resultCode === 0 ? "Запрос выполнен" : "Что-то пошло не так"
     return (
         <React.Fragment>
             <input type="text" placeholder={"TaskID"} value={taskID}
