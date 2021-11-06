@@ -57,6 +57,7 @@ export const GetTasks = () => {
     const [state, setState] = useState<any>({})
     const onClickHandler = () => {
         return todolistAPI.getTasks(todolistInput).then(res => {
+            console.log(res.data)
             setState(res.data)
             console.log(res)
         })

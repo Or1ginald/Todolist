@@ -2,12 +2,13 @@ import React, {ChangeEvent, useCallback} from 'react';
 import {ChangeText} from "./ChangeText";
 import {changeTaskStatusAC, deleteTaskTC, updateTaskTC} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
+import {TaskStatuses} from "../api/todolists-api";
 
 
 type TaskPropsType = {
     toDoListId: string
     id: string,
-    isDone: boolean
+    status: TaskStatuses
     title: string
     // onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
 }
@@ -15,11 +16,13 @@ type TaskPropsType = {
 export const Task = React.memo((props: TaskPropsType) => {
     console.log("one task render")
     const changeCheckBoxStatus = (event: ChangeEvent<HTMLInputElement>) => {
-        // changeCheckBoxStatus(toDoListId, e.id, event.currentTarget.checked)
-        dispatch(changeTaskStatusAC(props.toDoListId, props.id, event.currentTarget.checked))
+        const checked = event.currentTarget.checked;
+        const model = checked ? {status: TaskStatuses.Completed} : {status: TaskStatuses.New}
+        console.log(model);
+        dispatch(updateTaskTC(props.toDoListId, props.id, model))
     }
     const dispatch = useDispatch()
-    const {id, title, isDone} = props
+    const {id, title, status} = props
     const editTaskTitle = useCallback((title: string) => {
         dispatch(updateTaskTC(props.toDoListId, props.id, {title}))
     }, [dispatch, props.toDoListId, props.id])
@@ -28,7 +31,7 @@ export const Task = React.memo((props: TaskPropsType) => {
     }
     return (
         <li key={id}>
-            <input type="checkbox" checked={isDone} onChange={changeCheckBoxStatus}/>
+            <input type="checkbox" checked={status === TaskStatuses.Completed} onChange={changeCheckBoxStatus}/>
             <ChangeText title={title} callBack={editTaskTitle}/>
             <button onClick={deleteTask}>x</button>
         </li>

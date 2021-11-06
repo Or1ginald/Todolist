@@ -25,10 +25,17 @@ type getTasksResponseType = {
 export type updateTaskRequestModel = {
     title: string
     description: string
-    status: number
+    status: TaskStatuses
     priority: number
     startDate: string | null
     deadline: string | null
+}
+
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
 }
 
 
