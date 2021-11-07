@@ -1,6 +1,7 @@
+import Button from '@mui/material/Button';
 import React, {ChangeEvent, useCallback, useState} from 'react';
 import {Input} from "./Input";
-import {Button} from "./Button";
+import {MyButton} from "./MyButton";
 
 type InputPropsType = {
     addCallBack: (title: string) => void
@@ -20,7 +21,7 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
         <div>
             {/*<input onChange={inpOnChangeHandler} value={inputVal}/>*/}
             <Input onChangeHandler={inpOnChangeHandler} value={inputVal}/>
-            <Button title={"+"} callBack={addTaskHandler}/>
+            <MyButton title={"+"} callBack={addTaskHandler}/>
         </div>
     );
 });

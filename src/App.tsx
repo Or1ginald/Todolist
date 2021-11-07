@@ -9,11 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "./state/store";
 import {tasksType} from "./state/tasks-reducer";
 
-//
-// export type tasksType = {
-//     [key: string]: taskType[]
-// }
-
 export const App = React.memo(() => {
     const dispatch = useDispatch()
     const toDoLists = useSelector<rootReducerType, Array<ToDoListsType>>(store => store.toDoLists)
@@ -22,31 +17,8 @@ export const App = React.memo(() => {
 
     /*-------Functions--------*/
     const addToDoList = (title: string) => {
-        debugger
         dispatch(addToDoListTC(title))
     }
-    // const deleteToDoList = useCallback((toDoListId: string) => {
-    //     dispatch(deleteToDoListAC(toDoListId))
-    //
-    // }, [dispatch])
-    // const addTask = useCallback((toDoListId: string, title: string) => {
-    //     dispatch(addTaskAC(toDoListId, title))
-    // }, [dispatch])
-    // const changeCheckBoxStatus = useCallback((toDoListId: string, id: string, checked: boolean) => {
-    //     dispatch(changeTaskStatusAC(toDoListId, id, checked))
-    // }, [dispatch])
-    // const changeFilter = useCallback((toDoListId: string, newFilter: filterType) => {
-    //     dispatch(changeToDoListFilterAC(toDoListId, newFilter))
-    // }, [dispatch])
-    //
-    // const editToDoListTitle = useCallback((toDoListId: string, title: string) => {
-    //     dispatch(editToDoListTitleAC(toDoListId, title))
-    // }, [dispatch])
-    // const editTaskTitle = useCallback((toDoListId: string, id: string, title: string) => {
-    //     dispatch(changeTaskTitleAC(toDoListId, id, title))
-    // }, [dispatch])
-
-
     useEffect(() => {
         dispatch(setTodosTC)
     }, [dispatch])
@@ -56,13 +28,6 @@ export const App = React.memo(() => {
         <div className="App">
             <InputPlusButton addCallBack={addToDoList}/>
             {toDoLists.map(e => {
-                // let tasksList = tasks[e.id];
-                // if (e.filter === "Completed") {
-                //     tasksList = tasks[e.id].filter(e => e.isDone)
-                // }
-                // if (e.filter === "Active") {
-                //     tasksList = tasks[e.id].filter(e => !e.isDone)
-                // }
                 return (<ToDoList
                     key={e.id}
                     toDoListId={e.id}
