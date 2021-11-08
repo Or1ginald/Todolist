@@ -1,8 +1,9 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {ChangeText} from "./ChangeText";
-import {changeTaskStatusAC, deleteTaskTC, updateTaskTC} from "../state/tasks-reducer";
+import {deleteTaskTC, updateTaskTC} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 import {TaskStatuses} from "../api/todolists-api";
+import Checkbox from '@mui/material/Checkbox';
 
 
 type TaskPropsType = {
@@ -29,9 +30,16 @@ export const Task = React.memo((props: TaskPropsType) => {
     const deleteTask = () => {
         dispatch(deleteTaskTC(props.toDoListId, props.id))
     }
+    const label = { inputProps: { 'aria-label': 'Task Status' } };
     return (
         <li key={id}>
-            <input type="checkbox" checked={status === TaskStatuses.Completed} onChange={changeCheckBoxStatus}/>
+            {/*<input type="checkbox" checked={status === TaskStatuses.Completed} onChange={changeCheckBoxStatus}/>*/}
+            <Checkbox
+                {...label}
+                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                checked={status === TaskStatuses.Completed}
+                onChange={changeCheckBoxStatus}
+            />
             <ChangeText title={title} callBack={editTaskTitle}/>
             <button onClick={deleteTask}>x</button>
         </li>

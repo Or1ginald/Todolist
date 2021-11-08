@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 
 import './App.css';
-import {ToDoList} from "./components/ToDoList";
-import {InputPlusButton} from "./components/InputPlusButton";
+import {ToDoList} from "./components/ToDoList/ToDoList";
+import {InputPlusButton} from "./components/InputPlusButton/InputPlusButton";
 import {addToDoListTC, setTodosTC, ToDoListsType,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";

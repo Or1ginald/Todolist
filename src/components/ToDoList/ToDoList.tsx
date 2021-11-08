@@ -1,16 +1,17 @@
 import React, {useCallback, useEffect} from "react";
-import {InputPlusButton} from "./InputPlusButton";
-import {ChangeText} from "./ChangeText";
-import {addTaskTC, setTasksTC, taskType} from "../state/tasks-reducer";
+import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
+import {ChangeText} from "../ChangeText";
+import {addTaskTC, setTasksTC, taskType} from "../../state/tasks-reducer";
 import {useDispatch} from "react-redux";
-import {Task} from "./Task";
+import {Task} from "../Task";
 // import {rootReducerType} from "../state/store";
 import {
     changeToDoListFilterAC,
     deleteToDoListTC,
     editToDoListTitleTC,
     filterType
-} from "../state/todolists-reducer";
+} from "../../state/todolists-reducer";
+
 
 type ToDoListPropsType = {
     toDoListId: string
