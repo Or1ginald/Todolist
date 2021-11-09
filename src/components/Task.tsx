@@ -4,6 +4,8 @@ import {deleteTaskTC, updateTaskTC} from "../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 import {TaskStatuses} from "../api/todolists-api";
 import Checkbox from '@mui/material/Checkbox';
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 
 
 type TaskPropsType = {
@@ -41,7 +43,10 @@ export const Task = React.memo((props: TaskPropsType) => {
                 onChange={changeCheckBoxStatus}
             />
             <ChangeText title={title} callBack={editTaskTitle}/>
-            <button onClick={deleteTask}>x</button>
+            {/*<button onClick={deleteTask}>x</button>*/}
+            <IconButton aria-label="delete" size="large" onClick={deleteTask}>
+                <DeleteIcon />
+            </IconButton>
         </li>
     );
 });
