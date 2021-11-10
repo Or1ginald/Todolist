@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {taskType} from "../state/tasks-reducer";
+import {Nullable} from "../Types/Nullable";
 
 export type TodolistType = {
     id: string
@@ -27,8 +28,8 @@ export type updateTaskRequestModel = {
     description: string
     status: TaskStatuses
     priority: number
-    startDate: string | null
-    deadline: string | null
+    startDate: Nullable<string>
+    deadline: Nullable<string>
 }
 
 export enum TaskStatuses {
