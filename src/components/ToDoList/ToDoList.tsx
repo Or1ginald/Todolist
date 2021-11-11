@@ -68,7 +68,7 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
                 <DeleteIcon />
             </IconButton>
         </h3>
-        <InputPlusButton addCallBack={addTask}/>
+        <InputPlusButton addCallBack={addTask} label={"Add Task"}/>
         <ul>
             {tasksList.map(e => <Task id={e.id} status={e.status} title={e.title} key={e.id}
                                       toDoListId={props.toDoListId}/>)}

@@ -10,15 +10,22 @@ import {Nullable} from "../../Types/Nullable";
 
 type InputPropsType = {
     addCallBack: (title: string) => void
+    label: string
 }
 
 export const InputPlusButton = React.memo((props: InputPropsType) => {
+    const {addCallBack, label} = props
     console.log("InputPlusButton render")
     const [inputVal, setInpVal] = useState<string>("");
     const [error, setError] = useState<Nullable<string>>(null)
     const addTaskHandler = useCallback(() => {
-        props.addCallBack(inputVal)
-        setInpVal("")
+        if (inputVal.trim()) {
+            setError(null)
+            addCallBack(inputVal)
+            setInpVal("")
+        } else {
+            setError("Incorrect input")
+        }
     }, [inputVal, props])
     const inpOnChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInpVal(e.currentTarget.value)
@@ -26,18 +33,16 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
 
     return (
         <div>
-            {/*<input onChange={inpOnChangeHandler} value={inputVal}/>*/}
-            {/*<Input onChangeHandler={inpOnChangeHandler} value={inputVal}/>*/}
             <Box sx={{
                 display: 'flex',
                 gap: 1,
                 flexWrap: "nowrap",
             }}>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={inpOnChangeHandler}
-                       error={!!error}
-                       value={inputVal} size={"small"} className={s.input} helperText={error}/>
+                <TextField id="outlined-basic" label={label} variant="outlined" onChange={inpOnChangeHandler}
+                           error={!!error}
+                           value={inputVal} size={"small"} className={s.input} helperText={error}/>
 
-            <Button variant="contained" onClick={addTaskHandler} className={s.button}><AddIcon/></Button>
+                <Button variant="contained" onClick={addTaskHandler} className={s.button}><AddIcon/></Button>
             </Box>
         </div>
     );

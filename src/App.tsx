@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 
 import './App.css';
 import {ToDoList} from "./components/ToDoList/ToDoList";
@@ -16,17 +16,19 @@ export const App = React.memo(() => {
 
 
     /*-------Functions--------*/
-    const addToDoList = (title: string) => {
+    const addToDoList = useCallback((title: string) => {
         dispatch(addToDoListTC(title))
-    }
+    },[dispatch])
     useEffect(() => {
         dispatch(setTodosTC)
     }, [dispatch])
 
+
+
     /*-------Component--------*/
     return (
         <div className="App">
-            <InputPlusButton addCallBack={addToDoList}/>
+            <InputPlusButton addCallBack={addToDoList} label={"Add Todolist"}/>
             {toDoLists.map(e => {
                 return (<ToDoList
                     key={e.id}
