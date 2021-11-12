@@ -3,11 +3,25 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {ToDoList} from "./components/ToDoList/ToDoList";
 import {InputPlusButton} from "./components/InputPlusButton/InputPlusButton";
-import {addToDoListTC, setTodosTC, ToDoListsType,
+import {
+    addToDoListTC, setTodosTC, ToDoListsType,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "./state/store";
 import {tasksType} from "./state/tasks-reducer";
+import {
+    // AppBar,
+    Box,
+    // Button,
+    Container,
+    Grid,
+    // IconButton,
+    LinearProgress,
+    Paper,
+    // Toolbar,
+    // Typography
+} from '@mui/material'
+// import {Menu} from "@mui/icons-material";
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
@@ -18,27 +32,50 @@ export const App = React.memo(() => {
     /*-------Functions--------*/
     const addToDoList = useCallback((title: string) => {
         dispatch(addToDoListTC(title))
-    },[dispatch])
+    }, [dispatch])
     useEffect(() => {
         dispatch(setTodosTC)
     }, [dispatch])
 
 
-
     /*-------Component--------*/
     return (
         <div className="App">
-            <InputPlusButton addCallBack={addToDoList} label={"Add Todolist"}/>
-            {toDoLists.map(e => {
-                return (<ToDoList
-                    key={e.id}
-                    toDoListId={e.id}
-                    title={e.title}
-                    filter={e.filter}
-                    tasks={tasks[e.id]}
+            {/*<AppBar position="static">*/}
+            {/*    <Toolbar>*/}
+            {/*        <IconButton edge="start" color="inherit" aria-label="menu">*/}
+            {/*            <Menu/>*/}
+            {/*        </IconButton>*/}
+            {/*        <Typography variant="h6">*/}
+            {/*            News*/}
+            {/*        </Typography>*/}
+            {/*        <Button color="inherit">Login</Button>*/}
+            {/*    </Toolbar>*/}
+            {/*    <LinearProgress/>*/}
+            {/*</AppBar>*/}
+            <Box><LinearProgress/></Box>
+            {/**/}
 
-                />)
-            })}
+            <Container fixed>
+                <Grid container style={{padding: '20px'}}>
+                    <InputPlusButton addCallBack={addToDoList} label={"Add Todolist"}/>
+                </Grid>
+                <Grid container spacing={3}>
+                    {toDoLists.map(e => {
+                            return <Grid item>
+                                <Paper style={{padding: "10px"}}>
+                                    <ToDoList
+                                        key={e.id}
+                                        toDoListId={e.id}
+                                        title={e.title}
+                                        filter={e.filter}
+                                        tasks={tasks[e.id]}/>
+                                </Paper>
+                            </Grid>
+                        }
+                    )}
+                </Grid>
+            </Container>
         </div>
     );
 })
