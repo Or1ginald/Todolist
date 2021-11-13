@@ -1,6 +1,6 @@
 import {tasksReducer} from "./tasks-reducer";
 import {addToDoListAC, deleteToDoListAC, todDoListsReducer} from "./todolists-reducer";
-import {ToDoListsType} from "../App";
+import {ToDoListsType} from "../components/App/App";
 
 test("reducer should add empty array property to todolist", () => {
     const todolistsStartState: ToDoListsType = [];

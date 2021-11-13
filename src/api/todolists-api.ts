@@ -75,3 +75,6 @@ export const todolistAPI = {
     },
 
 }
+
+
+export const a = 10

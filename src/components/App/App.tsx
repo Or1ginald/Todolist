@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect} from 'react';
 
 import './App.css';
-import {ToDoList} from "./components/ToDoList/ToDoList";
-import {InputPlusButton} from "./components/InputPlusButton/InputPlusButton";
+import {ToDoList} from "../ToDoList/ToDoList";
+import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
 import {
     addToDoListTC, setTodosTC, ToDoListsType,
-} from "./state/todolists-reducer";
+} from "../../state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "./state/store";
-import {tasksType} from "./state/tasks-reducer";
+import {rootReducerType} from "../../state/store";
+import {tasksType} from "../../state/tasks-reducer";
 import {
     // AppBar,
     Box,
@@ -21,12 +21,14 @@ import {
     // Toolbar,
     // Typography
 } from '@mui/material'
+import { AppReducerInitialStateType } from './AppReducer';
 // import {Menu} from "@mui/icons-material";
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
     const toDoLists = useSelector<rootReducerType, Array<ToDoListsType>>(store => store.toDoLists)
     const tasks = useSelector<rootReducerType, tasksType>(store => store.tasks)
+    const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.AppReducer)
 
 
     /*-------Functions--------*/
@@ -53,7 +55,9 @@ export const App = React.memo(() => {
             {/*    </Toolbar>*/}
             {/*    <LinearProgress/>*/}
             {/*</AppBar>*/}
-            <Box><LinearProgress/></Box>
+            <Box>
+                {app.status&&<LinearProgress/>}
+            </Box>
             {/**/}
 
             <Container fixed>
