@@ -1,12 +1,15 @@
+
+type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
+
 export type AppReducerInitialStateType = {
-    status: boolean,
+    status: requestStatusType,
 }
 
 export const AppReducerInitialState: AppReducerInitialStateType = {
-    status: false,
+    status: "idle",
 }
 
-type setStatusACType = ReturnType<typeof setStatusAC>
+type setStatusACType = ReturnType<typeof setAppStatusAC>
 
 type mainActionType = setStatusACType
 
@@ -21,7 +24,7 @@ export const AppReducer = (state: AppReducerInitialStateType = AppReducerInitial
 }
 
 
-const setStatusAC = (status: boolean) => {
+export const setAppStatusAC = (status: requestStatusType) => {
     return {
         type: "SET_STATUS",
         status,

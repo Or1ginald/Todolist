@@ -55,8 +55,8 @@ export const App = React.memo(() => {
             {/*    </Toolbar>*/}
             {/*    <LinearProgress/>*/}
             {/*</AppBar>*/}
-            <Box>
-                {app.status&&<LinearProgress/>}
+            <Box height={5}>
+                {app.status==="loading"&&<LinearProgress/>}
             </Box>
             {/**/}
 

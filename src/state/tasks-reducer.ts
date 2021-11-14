@@ -6,6 +6,7 @@ import {
 import {Dispatch} from "redux";
 import {todolistAPI, updateTaskRequestModel} from "../api/todolists-api";
 import {rootReducerType} from "./store";
+import {setAppStatusAC} from "../components/App/AppReducer";
 
 
 /*------------Types---------------*/
@@ -167,25 +168,31 @@ export const setTasksAC = (tasks: Array<taskType>, todolistId: string) => {
 /*------------Action Creators---------------*/
 //thunks
 export const setTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     todolistAPI.getTasks(todolistId).then(res => {
         dispatch(setTasksAC(res.data.items, todolistId))
+        dispatch(setAppStatusAC("succeeded"))
     });
 }
 export const deleteTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     todolistAPI.deleteTask(todolistId, taskId)
         .then(res => {
             dispatch(deleteTaskAC(todolistId, taskId))
+            dispatch(setAppStatusAC("succeeded"))
         })
 }
 export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
     todolistAPI.createTask(todolistId, title)
         .then(res => {
             dispatch(addTaskAC(todolistId, res.data.data.item))
-            console.log(res)
+            dispatch(setAppStatusAC("succeeded"))
         })
 }
 export const updateTaskTC = (todolistId: string, taskId: string, model: updateTaskModelType) =>
     (dispatch: Dispatch, getState: () => rootReducerType) => {
+        dispatch(setAppStatusAC("loading"))
         const state = getState();
         const task = state.tasks[todolistId].find(el => el.id === taskId)
         if (!task) {
@@ -205,7 +212,7 @@ export const updateTaskTC = (todolistId: string, taskId: string, model: updateTa
         console.log(apiModel)
         todolistAPI.updateTask(todolistId, taskId, apiModel)
             .then(res=>{
-                console.log(res)
                 dispatch(updateTaskAC(todolistId, taskId, res.data.data.item))
+                dispatch(setAppStatusAC("succeeded"))
             })
     }
