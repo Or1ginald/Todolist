@@ -15,19 +15,21 @@ type InputPropsType = {
 
 export const InputPlusButton = React.memo((props: InputPropsType) => {
     const {addCallBack, label} = props
-    console.log("InputPlusButton render")
-    const [inputVal, setInpVal] = useState<string>("");
+
+    const [inputValue, setInpVal] = useState<string>("");
     const [error, setError] = useState<Nullable<string>>(null)
-    const addTaskHandler = useCallback(() => {
-        if (inputVal.trim()) {
+
+    const onAddItemButtonClick = useCallback(() => {
+        if (inputValue.trim()) {
             setError(null)
-            addCallBack(inputVal)
+            addCallBack(inputValue)
             setInpVal("")
         } else {
             setError("Incorrect input")
         }
-    }, [inputVal, props])
-    const inpOnChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    }, [addCallBack, inputValue])
+
+    const onTextInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInpVal(e.currentTarget.value)
     }, [])
 
@@ -38,11 +40,11 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
                 gap: 1,
                 flexWrap: "nowrap",
             }}>
-                <TextField id="outlined-basic" label={label} variant="outlined" onChange={inpOnChangeHandler}
+                <TextField id="outlined-basic" label={label} variant="outlined" onChange={onTextInputChange}
                            error={!!error}
-                           value={inputVal} size={"small"} className={s.input} helperText={error}/>
+                           value={inputValue} size={"small"} className={s.input} helperText={error}/>
 
-                <Button variant="contained" onClick={addTaskHandler} className={s.button}><AddIcon/></Button>
+                <Button variant="contained" onClick={onAddItemButtonClick} className={s.button}><AddIcon/></Button>
             </Box>
         </div>
     );

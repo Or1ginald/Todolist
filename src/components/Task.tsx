@@ -17,25 +17,27 @@ type TaskPropsType = {
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
-    console.log("one task render")
+    const {id, title, status} = props
+    // console.log("one task render")
+
+    const dispatch = useDispatch()
+
     const changeCheckBoxStatus = (event: ChangeEvent<HTMLInputElement>) => {
         const checked = event.currentTarget.checked;
         const model = checked ? {status: TaskStatuses.Completed} : {status: TaskStatuses.New}
-        console.log(model);
         dispatch(updateTaskTC(props.toDoListId, props.id, model))
     }
-    const dispatch = useDispatch()
-    const {id, title, status} = props
+
     const editTaskTitle = useCallback((title: string) => {
         dispatch(updateTaskTC(props.toDoListId, props.id, {title}))
     }, [dispatch, props.toDoListId, props.id])
+
     const deleteTask = () => {
         dispatch(deleteTaskTC(props.toDoListId, props.id))
     }
     const label = { inputProps: { 'aria-label': 'Task Status' } };
     return (
         <li key={id}>
-            {/*<input type="checkbox" checked={status === TaskStatuses.Completed} onChange={changeCheckBoxStatus}/>*/}
             <Checkbox
                 {...label}
                 sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
@@ -43,7 +45,6 @@ export const Task = React.memo((props: TaskPropsType) => {
                 onChange={changeCheckBoxStatus}
             />
             <ChangeText title={title} callBack={editTaskTitle}/>
-            {/*<button onClick={deleteTask}>x</button>*/}
             <IconButton aria-label="delete" size="large" onClick={deleteTask}>
                 <DeleteIcon />
             </IconButton>

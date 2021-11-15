@@ -15,6 +15,7 @@ import {
 } from "../../state/todolists-reducer";
 import {ButtonGroup} from "@mui/material";
 import Button from "@mui/material/Button";
+import {TaskStatuses} from "../../api/todolists-api";
 
 
 type ToDoListPropsType = {
@@ -33,54 +34,49 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
 
     /*-------Functions--------*/
 
-    const changeFilterHandler = (filter: filterType) => {
-        changeFilter(props.toDoListId, filter)
-    }
-    // const addTaskHandler = useCallback((inputVal: string) => {
-    //     addTask(props.toDoListId, inputVal)
-    // },[props.toDoListId])
-    const deleteToDoList = useCallback((toDoListId: string) => {
+    const onFilterButtonClick = useCallback((filter: filterType) => {
+        dispatch(changeToDoListFilterAC(props.toDoListId, filter))
+    }, [dispatch, props.toDoListId])
+
+    const onDeleteButtonClick = useCallback((toDoListId: string) => {
         dispatch(deleteToDoListTC(toDoListId))
     }, [dispatch])
-    const addTask = useCallback((title: string) => {
+
+    const handleAddTaskClick = useCallback((title: string) => {
         dispatch(addTaskTC(props.toDoListId, title))
     }, [dispatch, props.toDoListId])
-    const changeFilter = useCallback((toDoListId: string, newFilter: filterType) => {
-        dispatch(changeToDoListFilterAC(toDoListId, newFilter))
-    }, [dispatch])
 
     const editToDoListTitle = useCallback((title: string) => {
         dispatch(editToDoListTitleTC(props.toDoListId, title))
     }, [dispatch, props.toDoListId])
-    /*-------Functions--------*/
+
     let tasksList = props.tasks;
     if (props.filter === "Completed") {
-        tasksList = props.tasks.filter(e => e.status===2)
+        tasksList = props.tasks.filter(e => e.status === TaskStatuses.Completed)
     }
     if (props.filter === "Active") {
-        tasksList = props.tasks.filter(e => e.status===0)
+        tasksList = props.tasks.filter(e => e.status === TaskStatuses.New)
     }
+
     return <div>
         <h3>
             <ChangeText title={props.title} callBack={editToDoListTitle}/>
-            {/*<button onClick={() => deleteToDoList(props.toDoListId)}>x</button>*/}
-            <IconButton aria-label="delete" size="large" onClick={() => deleteToDoList(props.toDoListId)}>
-                <DeleteIcon />
+            <IconButton aria-label="delete" size="large" onClick={() => onDeleteButtonClick(props.toDoListId)}>
+                <DeleteIcon/>
             </IconButton>
         </h3>
-        <InputPlusButton addCallBack={addTask} label={"Add Task"}/>
+        <InputPlusButton addCallBack={handleAddTaskClick} label={"Add Task"}/>
         <ul>
-            {tasksList.map(e => <Task id={e.id} status={e.status} title={e.title} key={e.id}
-                                      toDoListId={props.toDoListId}/>)}
+            {tasksList.map(task => <Task id={task.id}
+                                         status={task.status}
+                                         title={task.title}
+                                         key={task.id}
+                                         toDoListId={props.toDoListId}/>)}
         </ul>
-
         <ButtonGroup color="primary" aria-label="medium secondary button group">
-            <Button onClick={() => changeFilterHandler("All")}>All</Button>
-            <Button onClick={() => changeFilterHandler("Active")}>Active</Button>
-            <Button onClick={() => changeFilterHandler("Completed")}>Completed</Button>
-            {/*<button onClick={() => changeFilterHandler("All")}>All</button>*/}
-            {/*<button onClick={() => changeFilterHandler("Active")}>Active</button>*/}
-            {/*<button onClick={() => changeFilterHandler("Completed")}>Completed</button>*/}
+            <Button onClick={() => onFilterButtonClick("All")}>All</Button>
+            <Button onClick={() => onFilterButtonClick("Active")}>Active</Button>
+            <Button onClick={() => onFilterButtonClick("Completed")}>Completed</Button>
         </ButtonGroup>
 
     </div>

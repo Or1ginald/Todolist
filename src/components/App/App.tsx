@@ -4,11 +4,10 @@ import './App.css';
 import {ToDoList} from "../ToDoList/ToDoList";
 import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
 import {
-    addToDoListTC, setTodosTC, ToDoListsType,
+    addToDoListTC, setTodosTC,
 } from "../../state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../state/store";
-import {tasksType} from "../../state/tasks-reducer";
 import {
     // AppBar,
     Box,
@@ -21,22 +20,22 @@ import {
     // Toolbar,
     // Typography
 } from '@mui/material'
-import { AppReducerInitialStateType } from './AppReducer';
+import {AppReducerInitialStateType} from './AppReducer';
 // import {Menu} from "@mui/icons-material";
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
-    const toDoLists = useSelector<rootReducerType, Array<ToDoListsType>>(store => store.toDoLists)
-    const tasks = useSelector<rootReducerType, tasksType>(store => store.tasks)
+
     const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.AppReducer)
+    const {toDoLists, tasks} = useSelector<rootReducerType, rootReducerType>(store => store)
 
-
-    /*-------Functions--------*/
-    const addToDoList = useCallback((title: string) => {
-        dispatch(addToDoListTC(title))
-    }, [dispatch])
     useEffect(() => {
         dispatch(setTodosTC)
+    }, [dispatch])
+
+
+    const handleAddTodolistClick = useCallback((title: string) => {
+        dispatch(addToDoListTC(title))
     }, [dispatch])
 
 
@@ -56,24 +55,23 @@ export const App = React.memo(() => {
             {/*    <LinearProgress/>*/}
             {/*</AppBar>*/}
             <Box height={5}>
-                {app.status==="loading"&&<LinearProgress/>}
+                {app.status === "loading" && <LinearProgress/>}
             </Box>
-            {/**/}
 
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
-                    <InputPlusButton addCallBack={addToDoList} label={"Add Todolist"}/>
+                    <InputPlusButton addCallBack={handleAddTodolistClick} label={"Add Todolist"}/>
                 </Grid>
                 <Grid container spacing={3}>
-                    {toDoLists.map(e => {
-                            return <Grid item>
+                    {toDoLists.map(todolist => {
+                            return <Grid item key={todolist.id}>
                                 <Paper style={{padding: "10px"}}>
                                     <ToDoList
-                                        key={e.id}
-                                        toDoListId={e.id}
-                                        title={e.title}
-                                        filter={e.filter}
-                                        tasks={tasks[e.id]}/>
+                                        key={todolist.id}
+                                        toDoListId={todolist.id}
+                                        title={todolist.title}
+                                        filter={todolist.filter}
+                                        tasks={tasks[todolist.id]}/>
                                 </Paper>
                             </Grid>
                         }

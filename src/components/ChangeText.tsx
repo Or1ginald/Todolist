@@ -6,7 +6,6 @@ type ChangeTextPropsType = {
 }
 
 export const ChangeText = React.memo((props: ChangeTextPropsType) => {
-    console.log("change text render")
     let {title, callBack} = props
     const [isEditable, setIsEditable] = useState(false)
     const [inputVal, setInputVal] = useState("")
