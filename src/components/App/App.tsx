@@ -20,14 +20,15 @@ import {
     // Toolbar,
     // Typography
 } from '@mui/material'
-import {AppReducerInitialStateType} from './AppReducer';
+import {ErrorSnackBar} from "../ErrorSnackBar";
 // import {Menu} from "@mui/icons-material";
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
 
-    const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.AppReducer)
-    const {toDoLists, tasks} = useSelector<rootReducerType, rootReducerType>(store => store)
+    // const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.AppReducer)
+    const {toDoLists, tasks, app} = useSelector<rootReducerType, rootReducerType>(store => store)
+
 
     useEffect(() => {
         dispatch(setTodosTC)
@@ -57,6 +58,7 @@ export const App = React.memo(() => {
             <Box height={5}>
                 {app.status === "loading" && <LinearProgress/>}
             </Box>
+            <ErrorSnackBar/>
 
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>

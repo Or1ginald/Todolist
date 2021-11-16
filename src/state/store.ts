@@ -9,7 +9,7 @@ import {AppReducer} from "../components/App/AppReducer";
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     toDoLists: todDoListsReducer,
-    AppReducer
+    app:AppReducer
 })
 
  export type rootReducerType = ReturnType<typeof rootReducer>
