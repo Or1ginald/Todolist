@@ -73,7 +73,9 @@ export const App = React.memo(() => {
                                         toDoListId={todolist.id}
                                         title={todolist.title}
                                         filter={todolist.filter}
-                                        tasks={tasks[todolist.id]}/>
+                                        tasks={tasks[todolist.id]}
+                                        entityStatus={todolist.entityStatus}
+                                    />
                                 </Paper>
                             </Grid>
                         }

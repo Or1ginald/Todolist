@@ -1,14 +1,15 @@
+import {Nullable} from "../../Types/Nullable";
 
-type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
+export type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
 
 export type AppReducerInitialStateType = {
     status: requestStatusType,
-    errorLog: string,
+    errorLog: Nullable<string>,
 }
 
 export const AppReducerInitialState: AppReducerInitialStateType = {
     status: "idle",
-    errorLog: "",
+    errorLog: null,
 }
 
 type setStatusACType = ReturnType<typeof setAppStatusAC>
@@ -22,6 +23,7 @@ export const AppReducer = (state: AppReducerInitialStateType = AppReducerInitial
             return {...state, status: action.status}
         }
         case "SET_ERROR_LOG": {
+            debugger
             return {...state, errorLog: action.error}
         }
         default:
@@ -36,7 +38,8 @@ export const setAppStatusAC = (status: requestStatusType) => {
         status,
     } as const
 }
-export const setErrorLogAC = (error: string) => {
+export const setErrorLogAC = (error: Nullable<string>) => {
+    debugger
     return {
         type: "SET_ERROR_LOG",
         error,

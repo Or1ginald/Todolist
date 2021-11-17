@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 
 import s from "./InputPlusButton.module.css"
 import {Nullable} from "../../Types/Nullable";
+import {ErrorSnackBar} from "../ErrorSnackBar";
+
 
 
 type InputPropsType = {
@@ -35,6 +37,7 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
 
     return (
         <div>
+            <ErrorSnackBar/>
             <Box sx={{
                 display: 'flex',
                 gap: 1,

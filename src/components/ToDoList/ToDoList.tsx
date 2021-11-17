@@ -16,6 +16,7 @@ import {
 import {ButtonGroup} from "@mui/material";
 import Button from "@mui/material/Button";
 import {TaskStatuses} from "../../api/todolists-api";
+import {requestStatusType} from "../App/AppReducer";
 
 
 type ToDoListPropsType = {
@@ -23,6 +24,7 @@ type ToDoListPropsType = {
     title: string
     tasks: taskType[]
     filter: filterType
+    entityStatus: requestStatusType
 }
 
 export const ToDoList = React.memo((props: ToDoListPropsType) => {
@@ -61,7 +63,8 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
     return <div>
         <h3>
             <ChangeText title={props.title} callBack={editToDoListTitle}/>
-            <IconButton aria-label="delete" size="large" onClick={() => onDeleteButtonClick(props.toDoListId)}>
+            <IconButton aria-label="delete" size="large" onClick={() => onDeleteButtonClick(props.toDoListId)}
+                        disabled={props.entityStatus === "loading"}>
                 <DeleteIcon/>
             </IconButton>
         </h3>

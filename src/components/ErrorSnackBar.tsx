@@ -10,11 +10,11 @@ export const ErrorSnackBar = memo(() => {
     const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.app)
 
     const onSnackBarClose = () => {
-        dispatch(setErrorLogAC(""))
+        dispatch(setErrorLogAC(null))
     }
 
     return (
-        <Snackbar open={!!app.errorLog} autoHideDuration={6000} onClose={onSnackBarClose}>
+        <Snackbar open={app.errorLog!==null} autoHideDuration={12000} onClose={onSnackBarClose}>
             <Alert onClose={onSnackBarClose} severity="error" sx={{width: '100%'}}>
                 {app.errorLog}
             </Alert>
