@@ -7,16 +7,20 @@ import Box from '@mui/material/Box';
 import s from "./InputPlusButton.module.css"
 import {Nullable} from "../../Types/Nullable";
 import {ErrorSnackBar} from "../ErrorSnackBar";
-
+import {useDispatch} from "react-redux";
+import {setErrorLogAC} from "../App/AppReducer";
 
 
 type InputPropsType = {
     addCallBack: (title: string) => void
     label: string
+    disabled: boolean
 }
 
 export const InputPlusButton = React.memo((props: InputPropsType) => {
+    console.log("redraw");
     const {addCallBack, label} = props
+    const dispatch = useDispatch()
 
     const [inputValue, setInpVal] = useState<string>("");
     const [error, setError] = useState<Nullable<string>>(null)
@@ -28,8 +32,9 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
             setInpVal("")
         } else {
             setError("Incorrect input")
+            dispatch(setErrorLogAC("Input should has at least one symbol except backspace"))
         }
-    }, [addCallBack, inputValue])
+    }, [addCallBack, dispatch, inputValue])
 
     const onTextInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInpVal(e.currentTarget.value)
@@ -45,9 +50,15 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
             }}>
                 <TextField id="outlined-basic" label={label} variant="outlined" onChange={onTextInputChange}
                            error={!!error}
-                           value={inputValue} size={"small"} className={s.input} helperText={error}/>
+                           value={inputValue}
+                           size={"small"}
+                           className={s.input}
+                           helperText={error} disabled={props.disabled}/>
 
-                <Button variant="contained" onClick={onAddItemButtonClick} className={s.button}><AddIcon/></Button>
+                <Button variant="contained" onClick={onAddItemButtonClick} className={s.button}
+                        disabled={props.disabled}>
+                    <AddIcon/>
+                </Button>
             </Box>
         </div>
     );

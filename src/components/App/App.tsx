@@ -8,20 +8,14 @@ import {
 } from "../../state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../state/store";
-import {
-    // AppBar,
-    Box,
-    // Button,
-    Container,
-    Grid,
-    // IconButton,
-    LinearProgress,
-    Paper,
-    // Toolbar,
-    // Typography
-} from '@mui/material'
+
 import {ErrorSnackBar} from "../ErrorSnackBar";
-// import {Menu} from "@mui/icons-material";
+import Box from '@mui/material/Box/Box';
+import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
+import {Grid} from "@mui/material";
+import Container from '@mui/material/Container/Container';
+import Paper from '@mui/material/Paper/Paper';
+
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
@@ -62,7 +56,7 @@ export const App = React.memo(() => {
 
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
-                    <InputPlusButton addCallBack={handleAddTodolistClick} label={"Add Todolist"}/>
+                    <InputPlusButton addCallBack={handleAddTodolistClick} label={"Add Todolist"} disabled={false}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {toDoLists.map(todolist => {

@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect} from "react";
+import {TaskStatuses} from "../../api/todolists-api";
+import {requestStatusType} from "../App/AppReducer";
 import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
 import {ChangeText} from "../ChangeText";
 import {addTaskTC, setTasksTC, taskType} from "../../state/tasks-reducer";
 import {useDispatch} from "react-redux";
 import {Task} from "../Task";
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 // import {rootReducerType} from "../state/store";
 import {
     changeToDoListFilterAC,
@@ -13,10 +14,11 @@ import {
     editToDoListTitleTC,
     filterType
 } from "../../state/todolists-reducer";
-import {ButtonGroup} from "@mui/material";
+
 import Button from "@mui/material/Button";
-import {TaskStatuses} from "../../api/todolists-api";
-import {requestStatusType} from "../App/AppReducer";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ButtonGroup from "@mui/material/ButtonGroup/ButtonGroup";
 
 
 type ToDoListPropsType = {
@@ -68,7 +70,8 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
                 <DeleteIcon/>
             </IconButton>
         </h3>
-        <InputPlusButton addCallBack={handleAddTaskClick} label={"Add Task"}/>
+        <InputPlusButton addCallBack={handleAddTaskClick} label={"Add Task"}
+                         disabled={props.entityStatus === "loading"}/>
         <ul>
             {tasksList.map(task => <Task id={task.id}
                                          status={task.status}
