@@ -37,14 +37,14 @@ export const todDoListsReducer = (state: Array<ToDoListsType> = initialState, ac
             return state.filter(el => el.id !== action.toDoListId)
         }
         case "ADD-TODOLIST": {
-            return [...state, {
+            return [{
                 id: action.todolistID,
                 title: action.title,
                 filter: 'All',
                 order: 0,
                 addedDate: "",
                 entityStatus: "idle"
-            }]
+            }, ...state]
         }
         case "EDIT-TODOLIST-TITLE": {
             return state.map(el => el.id === action.toDoListId ? {...el, title: action.title} : el)
@@ -139,6 +139,7 @@ export const addToDoListTC = (title: string) => (dispatch: Dispatch) => {
             if (res.data.resultCode === 1) {
                 dispatch(setErrorLogAC(res.data.messages[0]))
             }
+
             dispatch(setAppStatusAC("succeeded"))
         })
 }

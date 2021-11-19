@@ -47,7 +47,9 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
     }, [dispatch])
 
     const handleAddTaskClick = useCallback((title: string) => {
+        // dispatch(changeTodolistEntityStatusAC(props.toDoListId, "loading"))
         dispatch(addTaskTC(props.toDoListId, title))
+        // dispatch(changeTodolistEntityStatusAC(props.toDoListId, "succeeded"))
     }, [dispatch, props.toDoListId])
 
     const editToDoListTitle = useCallback((title: string) => {
@@ -73,10 +75,10 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
         <InputPlusButton addCallBack={handleAddTaskClick} label={"Add Task"}
                          disabled={props.entityStatus === "loading"}/>
         <ul>
-            {tasksList.map(task => <Task id={task.id}
+            {tasksList.map(task => <Task key={task.id}
+                                         id={task.id}
                                          status={task.status}
                                          title={task.title}
-                                         key={task.id}
                                          toDoListId={props.toDoListId}/>)}
         </ul>
         <ButtonGroup color="primary" aria-label="medium secondary button group">

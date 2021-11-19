@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import {TextField} from "@mui/material";
 import Box from '@mui/material/Box';
@@ -14,11 +14,10 @@ import {setErrorLogAC} from "../App/AppReducer";
 type InputPropsType = {
     addCallBack: (title: string) => void
     label: string
-    disabled: boolean
+    disabled?: boolean
 }
 
 export const InputPlusButton = React.memo((props: InputPropsType) => {
-    console.log("redraw");
     const {addCallBack, label} = props
     const dispatch = useDispatch()
 
@@ -36,6 +35,12 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
         }
     }, [addCallBack, dispatch, inputValue])
 
+    const onTextFieldKeyPress = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "Enter") {
+            onAddItemButtonClick()
+        }
+    }, [onAddItemButtonClick])
+
     const onTextInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInpVal(e.currentTarget.value)
     }, [])
@@ -49,11 +54,14 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
                 flexWrap: "nowrap",
             }}>
                 <TextField id="outlined-basic" label={label} variant="outlined" onChange={onTextInputChange}
+                           onKeyPress={onTextFieldKeyPress}
                            error={!!error}
                            value={inputValue}
                            size={"small"}
                            className={s.input}
-                           helperText={error} disabled={props.disabled}/>
+                           helperText={error}
+                           disabled={props.disabled}
+                />
 
                 <Button variant="contained" onClick={onAddItemButtonClick} className={s.button}
                         disabled={props.disabled}>

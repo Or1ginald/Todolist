@@ -193,6 +193,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
             if(res.data.resultCode===1){
                 dispatch(setErrorLogAC(res.data.messages[0]))
             }
+
             dispatch(setAppStatusAC("succeeded"))
         })
 }
