@@ -1,4 +1,4 @@
-import {Nullable} from "../../Types/Nullable";
+import {Nullable} from "../Types/Nullable";
 
 export type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
 
@@ -12,8 +12,8 @@ export const AppReducerInitialState: AppReducerInitialStateType = {
     errorLog: null,
 }
 
-type setStatusACType = ReturnType<typeof setAppStatusAC>
-type setErrorLogACType = ReturnType<typeof setErrorLogAC>
+export type setStatusACType = ReturnType<typeof setAppStatusAC>
+export type setErrorLogACType = ReturnType<typeof setErrorLogAC>
 
 type mainActionType = setStatusACType | setErrorLogACType
 

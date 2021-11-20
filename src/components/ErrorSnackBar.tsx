@@ -4,7 +4,7 @@ import Snackbar from '@mui/material/Snackbar/Snackbar';
 import React, {memo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../state/store";
-import {AppReducerInitialStateType, setErrorLogAC} from "./App/AppReducer";
+import {AppReducerInitialStateType, setErrorLogAC} from "../App/AppReducer";
 
 
 export const ErrorSnackBar = memo(() => {

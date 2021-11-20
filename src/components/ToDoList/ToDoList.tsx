@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from "react";
 import {TaskStatuses} from "../../api/todolists-api";
-import {requestStatusType} from "../App/AppReducer";
+import {requestStatusType} from "../../App/AppReducer";
 import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
 import {ChangeText} from "../ChangeText";
 import {addTaskTC, setTasksTC, taskType} from "../../state/tasks-reducer";

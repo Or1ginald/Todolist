@@ -1,15 +1,15 @@
 import React, {useCallback, useEffect} from 'react';
 
 import './App.css';
-import {ToDoList} from "../ToDoList/ToDoList";
-import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
+import {ToDoList} from "../components/ToDoList/ToDoList";
+import {InputPlusButton} from "../components/InputPlusButton/InputPlusButton";
 import {
     addToDoListTC, setTodosTC,
-} from "../../state/todolists-reducer";
+} from "../state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../../state/store";
+import {rootReducerType} from "../state/store";
 
-import {ErrorSnackBar} from "../ErrorSnackBar";
+import {ErrorSnackBar} from "../components/ErrorSnackBar";
 import Box from '@mui/material/Box/Box';
 import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
 import {Grid} from "@mui/material";
