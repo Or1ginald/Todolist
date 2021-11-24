@@ -197,6 +197,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
         .then(res => {
             if (res.data.resultCode===0) {
                 dispatch(addTaskAC(todolistId, res.data.data.item))
+                dispatch(setAppStatusAC("succeeded"))
 
             }
             if (res.data.resultCode === 1) {
@@ -225,7 +226,6 @@ export const updateTaskTC = (todolistId: string, taskId: string, model: updateTa
             status: task.status,
             ...model,
         }
-        console.log(apiModel)
         todolistAPI.updateTask(todolistId, taskId, apiModel)
             .then(res=>{
                 if (res.data.resultCode === 0) {
