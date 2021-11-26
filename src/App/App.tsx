@@ -12,7 +12,7 @@ import Container from '@mui/material/Container/Container';
 import {ToDoLists} from "../components/To-DoLists";
 import {AppReducerInitialStateType} from "./AppReducer";
 import {Login} from '../features/Login';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 
 
 export const App = React.memo(() => {
@@ -47,7 +47,10 @@ export const App = React.memo(() => {
                 <Routes>
                     <Route path={"/"} element={<ToDoLists/>}/>
                     <Route path={"/login"} element={<Login/>}/>
-                    <Route path={"*"} element={<h1>404</h1>}/>
+                    <Route path={"/404"} element={<h1>404</h1>}/>
+                    {/*<Navgate from={"*"} to={"/404"}/>*/}
+                    <Route path="*" element={<Navigate to={"/404"} />}/>
+
                 </Routes>
                 {/*<ToDoLists/>*/}
                 {/*<Login/>*/}
