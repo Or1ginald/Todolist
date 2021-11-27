@@ -32,7 +32,7 @@ export const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Password Required';
-            } else if (values.password.length<2) {
+            } else if (values.password.length < 2) {
                 errors.password = 'Password should contain >2 symbols';
             }
             return errors;
@@ -60,17 +60,20 @@ export const Login = () => {
                     <FormGroup>
                         <TextField label="Email" margin="normal" {...formik.getFieldProps('email')}
                         />
-                        {formik.touched.email && formik.errors.email
-                            ? <div style={{"color": "red"}}>{formik.errors.email}</div>
-                            : null}
+                        {formik.touched.email
+                        && formik.errors.email
+                        && <div style={{"color": "red"}}>{formik.errors.email}</div>
+                        }
                         <TextField type="password" label="Password"
                                    margin="normal" {...formik.getFieldProps('password')}
                         />
-                        {formik.touched.password && formik.errors.password
-                            ? <div style={{"color": "red"}}>{formik.errors.password}</div>
-                            : null}
+                        {formik.touched.password
+                        && formik.errors.password
+                        && <div style={{"color": "red"}}>{formik.errors.password}</div>
+                        }
                         <FormControlLabel label={'Remember me'} control={<Checkbox/>}
-                                          {...formik.getFieldProps('rememberMe')}/>
+                                          {...formik.getFieldProps('rememberMe')}
+                                          checked={formik.values.rememberMe}/>
                         <Button type={'submit'} variant={'contained'} color={'primary'}>
                             Login
                         </Button>
