@@ -39,6 +39,12 @@ export enum TaskStatuses {
     Draft = 3
 }
 
+type loginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.1/",
@@ -73,8 +79,15 @@ export const todolistAPI = {
     updateTask(todolistId: string, taskId: string, model: updateTaskRequestModel) {
         return instance.put<updateTaskRequestModel, AxiosResponse<ResponseType<{ item: taskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
-
 }
 
-
-export const a = 10
+export const authAPI = {
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance
+            .post<loginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>("auth/login", {
+                email,
+                password,
+                rememberMe
+            })
+    }
+}
