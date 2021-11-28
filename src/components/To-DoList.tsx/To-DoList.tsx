@@ -76,10 +76,11 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
                          disabled={props.entityStatus === "loading"}/>
         <ul>
             {tasksList.map(task => <Task key={task.id}
-                                         id={task.id}
-                                         status={task.status}
-                                         title={task.title}
-                                         toDoListId={props.toDoListId}/>)}
+                      id={task.id}
+                      status={task.status}
+                      title={task.title}
+                      toDoListId={props.toDoListId}/>
+            )}
         </ul>
         <ButtonGroup color="primary" aria-label="medium secondary button group">
             <Button onClick={() => onFilterButtonClick("All")}>All</Button>

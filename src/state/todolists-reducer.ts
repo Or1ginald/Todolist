@@ -143,7 +143,6 @@ export const addToDoListTC = (title: string) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     todolistAPI.createTodolist(title)
         .then(res => {
-            console.log(res.data)
             if (res.data.resultCode === 0) {
                 dispatch(addToDoListAC(title, res.data.data.item.id))
                 dispatch(setAppStatusAC("succeeded"))

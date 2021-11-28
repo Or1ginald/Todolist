@@ -17,6 +17,7 @@ type TaskPropsType = {
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
+    // debugger
     const {id, title, status} = props
     // console.log("one task render")
 

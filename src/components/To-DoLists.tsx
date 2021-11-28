@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../state/store";
 import {addToDoListTC, setTodosTC} from "../state/todolists-reducer";
 import Grid from '@mui/material/Grid';
+import { Navigate } from 'react-router-dom';
 
 
 export const ToDoLists = () => {
@@ -14,16 +15,25 @@ export const ToDoLists = () => {
 
     // const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.AppReducer)
     const {toDoLists, tasks} = useSelector<rootReducerType, rootReducerType>(store => store)
+    const isLoggedIn = useSelector<rootReducerType, boolean>(store => store.auth.isLoggedIn)
+
 
 
     useEffect(() => {
-        dispatch(setTodosTC)
-    }, [dispatch])
+            if(!isLoggedIn){
+                return
+            }
+            dispatch(setTodosTC)
+        }, [dispatch, isLoggedIn])
 
 
     const handleAddTodolistClick = useCallback((title: string) => {
         dispatch(addToDoListTC(title))
     }, [dispatch])
+
+    if(!isLoggedIn){
+        return <Navigate to={"/login"}/>
+    }
 
 
     return (

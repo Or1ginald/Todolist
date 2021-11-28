@@ -16,6 +16,12 @@ export type ResponseType<D = {}> = {
     data: D
 }
 
+type userParamsType = {
+    id: number,
+    email: string,
+    login: string,
+}
+
 
 type getTasksResponseType = {
     error: string,
@@ -34,12 +40,12 @@ export type updateTaskRequestModel = {
 
 export enum TaskStatuses {
     New = 0,
-    InProgress = 1,
+    // InProgress = 1,
     Completed = 2,
-    Draft = 3
+    // Draft = 3
 }
 
-type loginParamsType = {
+ export type loginParamsType = {
     email: string
     password: string
     rememberMe: boolean
@@ -89,5 +95,8 @@ export const authAPI = {
                 password,
                 rememberMe
             })
-    }
+    },
+    me(){
+        return instance.get<ResponseType<userParamsType>>("auth/me")
+    },
 }

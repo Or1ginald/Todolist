@@ -13,16 +13,25 @@ import {ToDoLists} from "../components/To-DoLists";
 import {AppReducerInitialStateType} from "./AppReducer";
 import {Login} from '../features/Login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
+import {authMeTC} from "../features/Login/authReducer";
 
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
 
     const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.app)
+    const isLoggedIn = useSelector<rootReducerType, boolean>(store => store.auth.isLoggedIn)
 
-    useEffect(() => {
-        dispatch(setTodosTC)
-    }, [dispatch])
+    useEffect(()=>{
+        dispatch(authMeTC())
+    },[dispatch])
+
+    // useEffect(() => {
+    //     if(!isLoggedIn){
+    //         return
+    //     }
+    //     dispatch(setTodosTC)
+    // }, [dispatch, isLoggedIn])
 
     return (
         <div className="App">
@@ -48,7 +57,6 @@ export const App = React.memo(() => {
                     <Route path={"/"} element={<ToDoLists/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/404"} element={<h1>404</h1>}/>
-                    {/*<Navgate from={"*"} to={"/404"}/>*/}
                     <Route path="*" element={<Navigate to={"/404"} />}/>
 
                 </Routes>
