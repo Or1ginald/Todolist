@@ -38,21 +38,19 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
 
     /*-------Functions--------*/
 
-    const onFilterButtonClick = useCallback((filter: filterType) => {
+    const onFilterButtonClick = useCallback((filter: filterType):void => {
         dispatch(changeToDoListFilterAC(props.toDoListId, filter))
     }, [dispatch, props.toDoListId])
 
-    const onDeleteButtonClick = useCallback((toDoListId: string) => {
+    const onDeleteButtonClick = useCallback((toDoListId: string):void => {
         dispatch(deleteToDoListTC(toDoListId))
     }, [dispatch])
 
-    const handleAddTaskClick = useCallback((title: string) => {
-        // dispatch(changeTodolistEntityStatusAC(props.toDoListId, "loading"))
+    const handleAddTaskClick = useCallback((title: string):void => {
         dispatch(addTaskTC(props.toDoListId, title))
-        // dispatch(changeTodolistEntityStatusAC(props.toDoListId, "succeeded"))
     }, [dispatch, props.toDoListId])
 
-    const editToDoListTitle = useCallback((title: string) => {
+    const editToDoListTitle = useCallback((title: string):void => {
         dispatch(editToDoListTitleTC(props.toDoListId, title))
     }, [dispatch, props.toDoListId])
 

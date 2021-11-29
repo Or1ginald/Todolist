@@ -7,7 +7,7 @@ import {Dispatch} from 'redux';
 import {ResponseType} from '../api/todolists-api';
 
 // generic function
-export const handleServerAppError = <D>(data: ResponseType<D>, dispatch: ErrorUtilsDispatchType) => {
+export const handleServerAppError = <D>(data: ResponseType<D>, dispatch: ErrorUtilsDispatchType):void => {
     if (data.messages.length) {
         dispatch(setErrorLogAC(data.messages[0]))
     } else {
@@ -16,7 +16,7 @@ export const handleServerAppError = <D>(data: ResponseType<D>, dispatch: ErrorUt
     dispatch(setAppStatusAC('failed'))
 }
 
-export const handleServerNetworkError = (error: { message: string }, dispatch: ErrorUtilsDispatchType) => {
+export const handleServerNetworkError = (error: { message: string }, dispatch: ErrorUtilsDispatchType):void => {
     dispatch(setErrorLogAC(error.message))
     dispatch(setAppStatusAC('failed'))
 }

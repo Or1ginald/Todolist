@@ -27,7 +27,7 @@ export const ToDoLists = () => {
         }, [dispatch, isLoggedIn])
 
 
-    const handleAddTodolistClick = useCallback((title: string) => {
+    const handleAddTodolistClick = useCallback((title: string): void => {
         dispatch(addToDoListTC(title))
     }, [dispatch])
 

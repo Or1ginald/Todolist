@@ -23,17 +23,17 @@ export const Task = React.memo((props: TaskPropsType) => {
 
     const dispatch = useDispatch()
 
-    const changeCheckBoxStatus = (event: ChangeEvent<HTMLInputElement>) => {
+    const changeCheckBoxStatus = (event: ChangeEvent<HTMLInputElement>):void => {
         const checked = event.currentTarget.checked;
         const model = checked ? {status: TaskStatuses.Completed} : {status: TaskStatuses.New}
         dispatch(updateTaskTC(props.toDoListId, props.id, model))
     }
 
-    const editTaskTitle = useCallback((title: string) => {
+    const editTaskTitle = useCallback((title: string):void => {
         dispatch(updateTaskTC(props.toDoListId, props.id, {title}))
     }, [dispatch, props.toDoListId, props.id])
 
-    const deleteTask = () => {
+    const deleteTask = ():void => {
         dispatch(deleteTaskTC(props.toDoListId, props.id))
     }
     const label = { inputProps: { 'aria-label': 'Task Status' } };
