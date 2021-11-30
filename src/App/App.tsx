@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 
 import './App.css';
-import {setTodosTC} from "../state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../state/store";
 
@@ -13,40 +12,41 @@ import {ToDoLists} from "../components/To-DoLists";
 import {AppReducerInitialStateType} from "./AppReducer";
 import {Login} from '../features/Login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {authMeTC} from "../features/Login/authReducer";
+import {authMeTC, logOutTC} from "../features/Login/authReducer";
+import CircularProgress from "@mui/material/CircularProgress";
+import {AppBar, Toolbar, Typography} from "@mui/material";
+import Button from "@mui/material/Button";
 
 
 export const App = React.memo(() => {
     const dispatch = useDispatch()
 
     const app = useSelector<rootReducerType, AppReducerInitialStateType>(store => store.app)
-    const isLoggedIn = useSelector<rootReducerType, boolean>(store => store.auth.isLoggedIn)
+    // const isLoggedIn = useSelector<rootReducerType, boolean>(store => store.auth.isLoggedIn)
 
     useEffect(()=>{
         dispatch(authMeTC())
     },[dispatch])
 
-    // useEffect(() => {
-    //     if(!isLoggedIn){
-    //         return
-    //     }
-    //     dispatch(setTodosTC)
-    // }, [dispatch, isLoggedIn])
+    if (!app.isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
+
 
     return (
         <div className="App">
-            {/*<AppBar position="static">*/}
-            {/*    <Toolbar>*/}
-            {/*        <IconButton edge="start" color="inherit" aria-label="menu">*/}
-            {/*            <Menu/>*/}
-            {/*        </IconButton>*/}
-            {/*        <Typography variant="h6">*/}
-            {/*            News*/}
-            {/*        </Typography>*/}
-            {/*        <Button color="inherit">Login</Button>*/}
-            {/*    </Toolbar>*/}
-            {/*    <LinearProgress/>*/}
-            {/*</AppBar>*/}
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className="title">
+                        That's a list for a things to do
+                    </Typography>
+                    <Button color="inherit" onClick={()=>dispatch(logOutTC())}>Log out</Button>
+                </Toolbar>
+            </AppBar>
+
             <Box height={5}>
                 {app.status === "loading" && <LinearProgress/>}
             </Box>

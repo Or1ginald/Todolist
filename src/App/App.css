@@ -8,3 +8,7 @@
 /*.App > div {*/
 /*  margin-right: 50px;*/
 /*}*/
+
+.title {
+    flex-grow: 1;
+}

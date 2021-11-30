@@ -5,25 +5,31 @@ export type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
 export type AppReducerInitialStateType = {
     status: requestStatusType,
     errorLog: Nullable<string>,
+    isInitialized: boolean,
 }
 
 export const AppReducerInitialState: AppReducerInitialStateType = {
     status: "idle",
     errorLog: null,
+    isInitialized: false,
 }
 
 export type setStatusACType = ReturnType<typeof setAppStatusAC>
 export type setErrorLogACType = ReturnType<typeof setErrorLogAC>
+export type setIsInitializedACType = ReturnType<typeof setIsInitializedAC>
 
-type mainActionType = setStatusACType | setErrorLogACType
+type mainActionType = setStatusACType | setErrorLogACType | setIsInitializedACType
 
 export const AppReducer = (state: AppReducerInitialStateType = AppReducerInitialState, action: mainActionType): AppReducerInitialStateType => {
     switch (action.type) {
-        case "SET_STATUS": {
+        case "APP/SET_STATUS": {
             return {...state, status: action.status}
         }
-        case "SET_ERROR_LOG": {
+        case "APP/SET_ERROR_LOG": {
             return {...state, errorLog: action.error}
+        }
+        case "APP/SET_INITIALIZE_STATUS": {
+            return {...state, isInitialized: action.isInitialized}
         }
         default:
             return state
@@ -33,13 +39,20 @@ export const AppReducer = (state: AppReducerInitialStateType = AppReducerInitial
 
 export const setAppStatusAC = (status: requestStatusType) => {
     return {
-        type: "SET_STATUS",
+        type: "APP/SET_STATUS",
         status,
     } as const
 }
 export const setErrorLogAC = (error: Nullable<string>) => {
     return {
-        type: "SET_ERROR_LOG",
+        type: "APP/SET_ERROR_LOG",
         error,
     } as const
+}
+
+export const setIsInitializedAC = (isInitialized: boolean) => {
+  return {
+      type: "APP/SET_INITIALIZE_STATUS",
+      isInitialized,
+  } as const
 }

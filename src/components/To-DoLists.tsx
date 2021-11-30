@@ -38,7 +38,7 @@ export const ToDoLists = () => {
 
     return (
         <>
-            <Grid container style={{padding: '20px'}}>
+            <Grid container style={{padding: '20px', width: "100%"}}>
                 <InputPlusButton addCallBack={handleAddTodolistClick} label={"Add Todolist"} disabled={false}/>
             </Grid>
             <Grid container spacing={3}>

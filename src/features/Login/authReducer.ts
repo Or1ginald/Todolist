@@ -1,5 +1,5 @@
 import {authAPI, loginParamsType} from "../../api/todolists-api";
-import {setAppStatusAC} from "../../App/AppReducer";
+import {setAppStatusAC, setIsInitializedAC} from "../../App/AppReducer";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {Dispatch} from "redux";
 
@@ -30,38 +30,58 @@ const setIsLoggedInAC = (value: boolean) => {
     } as const
 }
 
-export const loginTC = (data: loginParamsType) => (dispatch: Dispatch)=> {
+export const loginTC = (data: loginParamsType) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     authAPI.login(data.email, data.password, data.rememberMe)
-        .then(res=>{
+        .then(res => {
             console.log(res);
-            if(res.data.resultCode===0){
+            if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setAppStatusAC("succeeded"))
             }
-            if(res.data.resultCode===1){
+            if (res.data.resultCode === 1) {
                 handleServerAppError(res.data, dispatch)
             }
         })
-        .catch(error=>{
-        handleServerNetworkError(error, dispatch)
-    })
+        .catch(error => {
+            handleServerNetworkError(error, dispatch)
+        })
+}
+export const logOutTC = () => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    authAPI.logOut()
+        .then(res => {
+            console.log(res);
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(false))
+                dispatch(setAppStatusAC("succeeded"))
+            }
+            if (res.data.resultCode === 1) {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch(error => {
+            handleServerNetworkError(error, dispatch)
+        })
 }
 
 export const authMeTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
-  authAPI.me()
-      .then(res=>{
-          if(res.data.resultCode===0){
-              dispatch(setIsLoggedInAC(true))
-              dispatch(setAppStatusAC("succeeded"))
-          }
-          if(res.data.resultCode===1){
-              dispatch(setIsLoggedInAC(false))
-              handleServerAppError(res.data, dispatch)
-          }
-      })
-      .catch(error=>{
-      handleServerNetworkError(error, dispatch)
-  })
+    authAPI.me()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(true))
+                dispatch(setAppStatusAC("succeeded"))
+            }
+            if (res.data.resultCode === 1) {
+                dispatch(setIsLoggedInAC(false))
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch(error => {
+            handleServerNetworkError(error, dispatch)
+        })
+        .finally(() => {
+            dispatch(setIsInitializedAC(true))
+        })
 }
