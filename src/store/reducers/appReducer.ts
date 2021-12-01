@@ -1,4 +1,4 @@
-import {Nullable} from "../Types/Nullable";
+import {Nullable} from "../../Types/Nullable";
 
 export type requestStatusType = "loading" | "idle" | "succeeded" | "failed"
 

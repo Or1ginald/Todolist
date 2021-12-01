@@ -3,8 +3,8 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar/Snackbar';
 import React, {memo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../state/store";
-import {AppReducerInitialStateType, setErrorLogAC} from "../App/AppReducer";
+import {rootReducerType} from "../store/store";
+import {AppReducerInitialStateType, setErrorLogAC} from "../store/reducers/appReducer";
 
 
 export const ErrorSnackBar = memo(() => {

@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {taskType} from "../state/tasks-reducer";
+import {taskType} from "../store/reducers/tasksReducer";
 import {Nullable} from "../Types/Nullable";
 
 export type TodolistType = {

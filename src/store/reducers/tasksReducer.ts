@@ -2,12 +2,12 @@ import {
     addToDoListACType,
     deleteToDoListACType,
     setTodosACType,
-} from "./todolists-reducer";
+} from "./todolistsReducer";
 import {Dispatch} from "redux";
-import {todolistAPI, updateTaskRequestModel} from "../api/todolists-api";
-import {rootReducerType} from "./store";
-import {setAppStatusAC} from "../App/AppReducer";
-import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
+import {todolistAPI, updateTaskRequestModel} from "../../api/todolists-api";
+import {rootReducerType} from "../store";
+import {setAppStatusAC} from "./appReducer";
+import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 
 
 /*------------Types---------------*/
@@ -77,7 +77,7 @@ export const tasksReducer = (state: tasksType = initialState, action: mainAction
     switch (action.type) {
         case "SET_TODOS": {
             // action.todos.forEach(el=>{
-            //     return {...state, [el.id]: []}
+            //     return {...store, [el.id]: []}
             // })
             let copyState = {...state}
             action.todos.forEach(el => {
@@ -213,8 +213,8 @@ export const updateTaskTC = (todolistId: string, taskId: string, model: updateTa
         const state = getState();
         const task = state.tasks[todolistId].find(el => el.id === taskId)
         if (!task) {
-            //throw new Error("task not found in the state");
-            console.warn('task not found in the state')
+            //throw new Error("task not found in the store");
+            console.warn('task not found in the store')
             return
         }
         const apiModel: updateTaskRequestModel = {

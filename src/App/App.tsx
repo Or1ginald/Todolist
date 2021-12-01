@@ -2,17 +2,17 @@ import React, {useEffect} from 'react';
 
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../state/store";
+import {rootReducerType} from "../store/store";
 
 import {ErrorSnackBar} from "../components/ErrorSnackBar";
 import Box from '@mui/material/Box/Box';
 import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
 import Container from '@mui/material/Container/Container';
 import {ToDoLists} from "../components/To-DoLists";
-import {AppReducerInitialStateType} from "./AppReducer";
+import {AppReducerInitialStateType} from "../store/reducers/appReducer";
 import {Login} from '../features/Login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {authMeTC, logOutTC} from "../features/Login/authReducer";
+import {authMeTC, logOutTC} from "../store/reducers/authReducer";
 import CircularProgress from "@mui/material/CircularProgress";
 import {AppBar, Toolbar, Typography} from "@mui/material";
 import Button from "@mui/material/Button";

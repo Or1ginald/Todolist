@@ -2,7 +2,7 @@ import {
     setAppStatusAC,
     setErrorLogAC, setErrorLogACType,
     setStatusACType
-} from '../App/AppReducer';
+} from '../store/reducers/appReducer';
 import {Dispatch} from 'redux';
 import {ResponseType} from '../api/todolists-api';
 

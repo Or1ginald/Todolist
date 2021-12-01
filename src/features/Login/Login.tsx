@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "./authReducer";
-import {rootReducerType} from "../../state/store";
+import {loginTC} from "../../store/reducers/authReducer";
+import {rootReducerType} from "../../store/store";
 import {Navigate} from "react-router-dom";
 
 type FormikErrorType = {

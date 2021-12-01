@@ -4,8 +4,8 @@ import {InputPlusButton} from "./InputPlusButton/InputPlusButton";
 import Paper from "@mui/material/Paper/Paper";
 import {ToDoList} from "./To-DoList.tsx/To-DoList";
 import {useDispatch, useSelector} from "react-redux";
-import {rootReducerType} from "../state/store";
-import {addToDoListTC, setTodosTC} from "../state/todolists-reducer";
+import {rootReducerType} from "../store/store";
+import {addToDoListTC, setTodosTC} from "../store/reducers/todolistsReducer";
 import Grid from '@mui/material/Grid';
 import { Navigate } from 'react-router-dom';
 

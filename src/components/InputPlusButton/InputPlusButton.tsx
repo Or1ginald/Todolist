@@ -8,7 +8,7 @@ import s from "./InputPlusButton.module.css"
 import {Nullable} from "../../Types/Nullable";
 import {ErrorSnackBar} from "../ErrorSnackBar";
 import {useDispatch} from "react-redux";
-import {setErrorLogAC} from "../../App/AppReducer";
+import {setErrorLogAC} from "../../store/reducers/appReducer";
 
 
 type InputPropsType = {

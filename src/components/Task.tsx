@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {ChangeText} from "./ChangeText";
-import {deleteTaskTC, updateTaskTC} from "../state/tasks-reducer";
+import {deleteTaskTC, updateTaskTC} from "../store/reducers/tasksReducer";
 import {useDispatch} from "react-redux";
 import {TaskStatuses} from "../api/todolists-api";
 import Checkbox from '@mui/material/Checkbox';

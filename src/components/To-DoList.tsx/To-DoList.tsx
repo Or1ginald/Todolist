@@ -1,19 +1,19 @@
 import React, {useCallback, useEffect} from "react";
 import {TaskStatuses} from "../../api/todolists-api";
-import {requestStatusType} from "../../App/AppReducer";
+import {requestStatusType} from "../../store/reducers/appReducer";
 import {InputPlusButton} from "../InputPlusButton/InputPlusButton";
 import {ChangeText} from "../ChangeText";
-import {addTaskTC, setTasksTC, taskType} from "../../state/tasks-reducer";
+import {addTaskTC, setTasksTC, taskType} from "../../store/reducers/tasksReducer";
 import {useDispatch} from "react-redux";
 import {Task} from "../Task";
 
-// import {rootReducerType} from "../state/store";
+// import {rootReducerType} from "../store/store";
 import {
     changeToDoListFilterAC,
     deleteToDoListTC,
     editToDoListTitleTC,
     filterType
-} from "../../state/todolists-reducer";
+} from "../../store/reducers/todolistsReducer";
 
 import Button from "@mui/material/Button";
 import IconButton from '@mui/material/IconButton';

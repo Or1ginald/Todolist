@@ -1,5 +1,5 @@
 import {authAPI, loginParamsType} from "../../api/todolists-api";
-import {setAppStatusAC, setIsInitializedAC} from "../../App/AppReducer";
+import {setAppStatusAC, setIsInitializedAC} from "./appReducer";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {Dispatch} from "redux";
 
