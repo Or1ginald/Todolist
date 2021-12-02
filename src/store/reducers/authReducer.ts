@@ -23,7 +23,7 @@ export const authReducer = (state: authReducerInitStateType = authReducerInitSta
     }
 }
 
-const setIsLoggedInAC = (value: boolean) => {
+export const setIsLoggedInAC = (value: boolean) => {
     return {
         type: 'login/SET-IS-LOGGED-IN',
         value

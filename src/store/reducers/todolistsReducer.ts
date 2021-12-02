@@ -169,7 +169,7 @@ export const editToDoListTitleTC = (toDoListId: string, title: string) => (dispa
         handleServerNetworkError(error, dispatch)
         })
 }
-// export const deleteToDoListTC = (dispatch: Dispatch) => {}
+
 
 /*-------------Thunk Creators----------------*/
 
