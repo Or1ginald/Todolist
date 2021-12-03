@@ -34,10 +34,10 @@ const initialState: Array<ToDoListsType> = [];
 
 export const todDoListsReducer = (state: Array<ToDoListsType> = initialState, action: mainActionType): Array<ToDoListsType> => {
     switch (action.type) {
-        case "DELETE-TODOLIST": {
+        case "TO-DO_LISTS/DELETE-TODOLIST": {
             return state.filter(el => el.id !== action.toDoListId)
         }
-        case "ADD-TODOLIST": {
+        case "TO-DO_LISTS/ADD-TODOLIST": {
             return [{
                 id: action.todolistID,
                 title: action.title,
@@ -47,16 +47,16 @@ export const todDoListsReducer = (state: Array<ToDoListsType> = initialState, ac
                 entityStatus: "idle"
             }, ...state]
         }
-        case "EDIT-TODOLIST-TITLE": {
+        case "TO-DO_LISTS/EDIT-TODOLIST-TITLE": {
             return state.map(el => el.id === action.toDoListId ? {...el, title: action.title} : el)
         }
-        case "CHANGE-FILTER": {
+        case "TO-DO_LISTS/CHANGE-FILTER": {
             return state.map(el => el.id === action.toDoListId ? {...el, filter: action.filter} : el)
         }
-        case "SET_TODOS": {
+        case "TO-DO_LISTS/SET_TODOS": {
             return action.todos.map(el => ({...el, filter: "All", entityStatus: "idle"}))
         }
-        case "CHANGE_TODOLIST_ENTITY_STATUS": {
+        case "TO-DO_LISTS/CHANGE_TODOLIST_ENTITY_STATUS": {
             return state.map(el => el.id === action.toDoListId ? {...el, entityStatus: action.entityStatus} : el)
         }
         default: {
@@ -68,27 +68,27 @@ export const todDoListsReducer = (state: Array<ToDoListsType> = initialState, ac
 /*-------------Action Creators----------------*/
 export const deleteToDoListAC = (toDoListId: string) => {
     return {
-        type: "DELETE-TODOLIST",
+        type: "TO-DO_LISTS/DELETE-TODOLIST",
         toDoListId,
     } as const
 }
 export const addToDoListAC = (title: string, todolistID: string) => {
     return {
-        type: "ADD-TODOLIST",
+        type: "TO-DO_LISTS/ADD-TODOLIST",
         title,
         todolistID
     } as const
 }
 export const editToDoListTitleAC = (toDoListId: string, title: string) => {
     return {
-        type: "EDIT-TODOLIST-TITLE",
+        type: "TO-DO_LISTS/EDIT-TODOLIST-TITLE",
         title,
         toDoListId
     } as const
 }
 export const changeToDoListFilterAC = (toDoListId: string, filter: filterType) => {
     return {
-        type: "CHANGE-FILTER",
+        type: "TO-DO_LISTS/CHANGE-FILTER",
         toDoListId,
         filter,
     } as const
@@ -96,13 +96,13 @@ export const changeToDoListFilterAC = (toDoListId: string, filter: filterType) =
 
 export const setTodosAC = (todos: Array<TodolistType>) => {
     return {
-        type: "SET_TODOS",
+        type: "TO-DO_LISTS/SET_TODOS",
         todos
     } as const
 }
 export const changeTodolistEntityStatusAC = (toDoListId: string, entityStatus: requestStatusType) => {
     return {
-        type: "CHANGE_TODOLIST_ENTITY_STATUS",
+        type: "TO-DO_LISTS/CHANGE_TODOLIST_ENTITY_STATUS",
         entityStatus,
         toDoListId
     } as const

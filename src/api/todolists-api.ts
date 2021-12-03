@@ -31,7 +31,7 @@ type getTasksResponseType = {
 
 export type updateTaskRequestModel = {
     title: string
-    description: string
+    description: Nullable<string>
     status: TaskStatuses
     priority: number
     startDate: Nullable<string>

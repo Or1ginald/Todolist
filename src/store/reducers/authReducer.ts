@@ -34,7 +34,6 @@ export const loginTC = (data: loginParamsType) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     authAPI.login(data.email, data.password, data.rememberMe)
         .then(res => {
-            console.log(res);
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setAppStatusAC("succeeded"))
