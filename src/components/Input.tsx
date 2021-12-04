@@ -1,14 +1,10 @@
-import React, {ChangeEvent} from 'react';
-
+import React, { ChangeEvent } from 'react';
 
 type InputPropsType = {
-    onChangeHandler: (e:ChangeEvent<HTMLInputElement>)=>void
-    value: string
-}
+  onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+};
 
-export const Input = React.memo((props:InputPropsType) => {
-    return (
-        <input onChange={props.onChangeHandler} value={props.value}/>
-    );
-});
-
+export const Input = React.memo((props: InputPropsType) => (
+  <input onChange={props.onChangeHandler} value={props.value} />
+));

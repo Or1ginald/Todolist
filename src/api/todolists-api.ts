@@ -1,105 +1,120 @@
-import axios, {AxiosResponse} from "axios";
-import {taskType} from "../store/reducers/tasksReducer";
-import {Nullable} from "../Types/Nullable";
+import axios, { AxiosResponse } from 'axios';
+
+import { taskType } from '../store/reducers/tasksReducer';
+
+import { Nullable } from 'types';
 
 export type TodolistType = {
-    id: string
-    addedDate: string
-    order: number
-    title: string
-}
+  id: string;
+  addedDate: string;
+  order: number;
+  title: string;
+};
 
 export type ResponseType<D = {}> = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    data: D
-}
+  resultCode: number;
+  messages: Array<string>;
+  fieldsErrors: Array<string>;
+  data: D;
+};
 
 type userParamsType = {
-    id: number,
-    email: string,
-    login: string,
-}
-
+  id: number;
+  email: string;
+  login: string;
+};
 
 type getTasksResponseType = {
-    error: string,
-    totalCount: number,
-    items: Array<taskType>
-}
+  error: string;
+  totalCount: number;
+  items: Array<taskType>;
+};
 
 export type updateTaskRequestModel = {
-    title: string
-    description: Nullable<string>
-    status: TaskStatuses
-    priority: number
-    startDate: Nullable<string>
-    deadline: Nullable<string>
-}
+  title: string;
+  description: Nullable<string>;
+  status: TaskStatuses;
+  priority: number;
+  startDate: Nullable<string>;
+  deadline: Nullable<string>;
+};
 
 export enum TaskStatuses {
-    New = 0,
-    // InProgress = 1,
-    Completed = 2,
-    // Draft = 3
+  New = 0,
+  // InProgress = 1,
+  Completed = 2,
+  // Draft = 3
 }
 
- export type loginParamsType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha?: boolean
-}
+export type loginParamsType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  captcha?: boolean;
+};
 
 const instance = axios.create({
-    baseURL: "https://social-network.samuraijs.com/api/1.1/",
-    withCredentials: true,
-    headers: {
-        "API-KEY": "83d8ce59-1071-4004-a943-7e866657a87e",
-    },
-})
+  baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+  withCredentials: true,
+  headers: {
+    'API-KEY': '83d8ce59-1071-4004-a943-7e866657a87e',
+  },
+});
 
 export const todolistAPI = {
-    getTodolists() {
-        return instance.get<Array<TodolistType>>('todo-lists')
-    },
-    createTodolist(title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TodolistType }>>>("todo-lists", {title})
-    },
-    deleteTodolist(todolistId: string) {
-        return instance.delete<ResponseType>(`todo-lists/${todolistId}`)
-    },
-    updateTodolist(todolistId: string, title: string) {
-        return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}`, {title})
-    },
-    getTasks(todolistId: string) {
-        return instance.get<getTasksResponseType>(`todo-lists/${todolistId}/tasks`)
-    },
-    createTask(todolistId: string, title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: taskType }>>>(`todo-lists/${todolistId}/tasks`, {title})
-    },
-    deleteTask(todolistId: string, taskId: string) {
-        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
-    },
-    updateTask(todolistId: string, taskId: string, model: updateTaskRequestModel) {
-        return instance.put<updateTaskRequestModel, AxiosResponse<ResponseType<{ item: taskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
-    },
-}
+  getTodolists() {
+    return instance.get<Array<TodolistType>>('todo-lists');
+  },
+  createTodolist(title: string) {
+    return instance.post<
+      { title: string },
+      AxiosResponse<ResponseType<{ item: TodolistType }>>
+    >('todo-lists', { title });
+  },
+  deleteTodolist(todolistId: string) {
+    return instance.delete<ResponseType>(`todo-lists/${todolistId}`);
+  },
+  updateTodolist(todolistId: string, title: string) {
+    return instance.put<{ title: string }, AxiosResponse<ResponseType>>(
+      `todo-lists/${todolistId}`,
+      { title },
+    );
+  },
+  getTasks(todolistId: string) {
+    return instance.get<getTasksResponseType>(`todo-lists/${todolistId}/tasks`);
+  },
+  createTask(todolistId: string, title: string) {
+    return instance.post<
+      { title: string },
+      AxiosResponse<ResponseType<{ item: taskType }>>
+    >(`todo-lists/${todolistId}/tasks`, { title });
+  },
+  deleteTask(todolistId: string, taskId: string) {
+    return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
+  },
+  updateTask(todolistId: string, taskId: string, model: updateTaskRequestModel) {
+    return instance.put<
+      updateTaskRequestModel,
+      AxiosResponse<ResponseType<{ item: taskType }>>
+    >(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+  },
+};
 
 export const authAPI = {
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance
-            .post<loginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>("auth/login", {
-                email,
-                password,
-                rememberMe
-            })
-    },
-    me(){
-        return instance.get<ResponseType<userParamsType>>("auth/me")
-    },
-    logOut(){
-        return instance.delete<ResponseType>("auth/login")
-    },
-}
+  login(email: string, password: string, rememberMe: boolean) {
+    return instance.post<
+      loginParamsType,
+      AxiosResponse<ResponseType<{ userId: number }>>
+    >('auth/login', {
+      email,
+      password,
+      rememberMe,
+    });
+  },
+  me() {
+    return instance.get<ResponseType<userParamsType>>('auth/me');
+  },
+  logOut() {
+    return instance.delete<ResponseType>('auth/login');
+  },
+};
