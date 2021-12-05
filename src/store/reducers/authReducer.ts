@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 
 import { authAPI, loginParamsType } from '../../api/todolists-api';
-import { handleServerAppError, handleServerNetworkError } from '../../utils/error-utils';
 
 import { setAppStatusAC, setIsInitializedAC } from './appReducer';
 
 import { ResponseCode } from 'enums';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 type authReducerInitStateType = typeof authReducerInitState;
 type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>;

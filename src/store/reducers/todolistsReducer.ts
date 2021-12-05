@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 
 import { todolistAPI, TodolistType } from '../../api/todolists-api';
-import { handleServerAppError, handleServerNetworkError } from '../../utils/error-utils';
 
 import { requestStatusType, setAppStatusAC } from './appReducer';
 
 import { ResponseCode } from 'enums';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 /* -------------types----------------*/
 export type ToDoListsType = TodolistType & {

@@ -5,12 +5,10 @@ import Paper from '@mui/material/Paper/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { addToDoListTC, setTodosTC } from '../store/reducers/todolistsReducer';
-import { rootReducerType } from '../store/store';
+import { addToDoListTC, setTodosTC } from '../../store/reducers/todolistsReducer';
+import { rootReducerType } from '../../store/store';
 
-import { InputPlusButton } from './InputPlusButton/InputPlusButton';
-import { ToDoList } from './To-DoList.tsx/To-DoList';
-
+import { InputPlusButton, ToDoList } from 'components';
 import { ReturnComponentType } from 'types';
 
 export const ToDoLists = (): ReturnComponentType => {

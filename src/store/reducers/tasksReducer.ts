@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 
 import { todolistAPI, updateTaskRequestModel } from '../../api/todolists-api';
-import { handleServerAppError, handleServerNetworkError } from '../../utils/error-utils';
 import { rootReducerType } from '../store';
 
 import { setAppStatusAC } from './appReducer';
@@ -13,6 +12,7 @@ import {
 
 import { ResponseCode } from 'enums';
 import { Nullable } from 'types';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 /* ------------types---------------*/
 type mainActionType =

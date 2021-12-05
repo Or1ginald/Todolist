@@ -15,11 +15,8 @@ import {
   editToDoListTitleTC,
   filterType,
 } from '../../store/reducers/todolistsReducer';
-import { ChangeText } from '../ChangeText';
-import { InputPlusButton } from '../InputPlusButton/InputPlusButton';
-import { Task } from '../Task';
 
-// import {rootReducerType} from "../store/store";
+import { ChangeText, InputPlusButton, Task } from 'components';
 
 type ToDoListPropsType = {
   toDoListId: string;

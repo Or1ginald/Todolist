@@ -10,12 +10,11 @@ import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ErrorSnackBar } from '../components/ErrorSnackBar';
-import { ToDoLists } from '../components/To-DoLists';
-import { Login } from '../features/Login/Login';
 import { AppReducerInitialStateType } from '../store/reducers/appReducer';
 import { authMeTC, logOutTC } from '../store/reducers/authReducer';
 import { rootReducerType } from '../store/store';
+
+import { Login, ToDoLists, ErrorSnackBar } from 'components';
 
 export const App = React.memo(() => {
   const dispatch = useDispatch();

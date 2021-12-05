@@ -7,10 +7,10 @@ import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 
 import { setErrorLogAC } from '../../store/reducers/appReducer';
-import { ErrorSnackBar } from '../ErrorSnackBar';
 
 import s from './InputPlusButton.module.css';
 
+import { ErrorSnackBar } from 'components';
 import { Nullable } from 'types';
 
 type InputPropsType = {
