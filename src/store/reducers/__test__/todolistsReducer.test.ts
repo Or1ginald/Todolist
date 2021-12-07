@@ -1,4 +1,3 @@
-import { ARRAY_ELEMENT_ZERO } from '../../../constants/baseConstants';
 import {
   addToDoListAC,
   changeTodolistEntityStatusAC,
@@ -9,8 +8,6 @@ import {
   todDoListsReducer,
   ToDoListsType,
 } from '../todolistsReducer';
-
-import { FOUR, ONE, THREE, TWO } from './constants';
 
 describe('app reducer', () => {
   let initialState: Array<ToDoListsType>;
@@ -46,28 +43,28 @@ describe('app reducer', () => {
 
   it('should delete todolist', () => {
     const action = deleteToDoListAC('2f7a7720-3a82-4b12-ad48-afd516d0535f');
-    expect(todDoListsReducer(initialState, action).length).toBe(TWO);
-    expect(todDoListsReducer(initialState, action)[ARRAY_ELEMENT_ZERO].title).toBe(
+    expect(todDoListsReducer(initialState, action).length).toBe(2);
+    expect(todDoListsReducer(initialState, action)[0].title).toBe(
       'Need to watch',
     );
-    expect(todDoListsReducer(initialState, action)[ONE].title).toBe('Random name');
+    expect(todDoListsReducer(initialState, action)[1].title).toBe('Random name');
   });
   it('should add todolist', () => {
     const action = addToDoListAC('New Todo', 'New Id');
-    expect(todDoListsReducer(initialState, action).length).toBe(FOUR);
-    expect(todDoListsReducer(initialState, action)[ARRAY_ELEMENT_ZERO].title).toBe(
+    expect(todDoListsReducer(initialState, action).length).toBe(4);
+    expect(todDoListsReducer(initialState, action)[0].title).toBe(
       'New Todo',
     );
-    expect(todDoListsReducer(initialState, action)[ARRAY_ELEMENT_ZERO].id).toBe('New Id');
+    expect(todDoListsReducer(initialState, action)[0].id).toBe('New Id');
   });
   it("should change todolist's title", () => {
     const action = editToDoListTitleAC(
       '2f7a7720-3a82-4b62-ad48-afd516d0535f',
       'New Title',
     );
-    expect(todDoListsReducer(initialState, action).length).toBe(THREE);
-    expect(todDoListsReducer(initialState, action)[TWO].title).toBe('New Title');
-    expect(todDoListsReducer(initialState, action)[TWO].id).toBe(
+    expect(todDoListsReducer(initialState, action).length).toBe(3);
+    expect(todDoListsReducer(initialState, action)[2].title).toBe('New Title');
+    expect(todDoListsReducer(initialState, action)[2].id).toBe(
       '2f7a7720-3a82-4b62-ad48-afd516d0535f',
     );
   });
@@ -76,12 +73,12 @@ describe('app reducer', () => {
       '2f7a7720-3a82-4b62-ad48-afd516d0535f',
       'Active',
     );
-    expect(todDoListsReducer(initialState, action).length).toBe(THREE);
-    expect(todDoListsReducer(initialState, action)[TWO].filter).toBe('Active');
-    expect(todDoListsReducer(initialState, action)[ARRAY_ELEMENT_ZERO].filter).toBe(
+    expect(todDoListsReducer(initialState, action).length).toBe(3);
+    expect(todDoListsReducer(initialState, action)[2].filter).toBe('Active');
+    expect(todDoListsReducer(initialState, action)[0].filter).toBe(
       'All',
     );
-    expect(todDoListsReducer(initialState, action)[ONE].filter).toBe('All');
+    expect(todDoListsReducer(initialState, action)[1].filter).toBe('All');
   });
   it('should set todos', () => {
     const arr = [
@@ -99,18 +96,18 @@ describe('app reducer', () => {
       },
     ];
     const action = setTodosAC(arr);
-    expect(todDoListsReducer(initialState, action)[ARRAY_ELEMENT_ZERO]).toStrictEqual(
-      initialState[ARRAY_ELEMENT_ZERO],
+    expect(todDoListsReducer(initialState, action)[0]).toStrictEqual(
+      initialState[0],
     );
-    expect(todDoListsReducer(initialState, action)[ONE]).toStrictEqual(initialState[ONE]);
+    expect(todDoListsReducer(initialState, action)[1]).toStrictEqual(initialState[1]);
   });
   it("should change todolist's entity status", () => {
     const action = changeTodolistEntityStatusAC(
       '2f7a7720-3a82-4b62-ad48-afd516d0535f',
       'succeeded',
     );
-    expect(todDoListsReducer(initialState, action)[TWO].entityStatus).toBe('succeeded');
-    expect(todDoListsReducer(initialState, action)[TWO].id).toBe(
+    expect(todDoListsReducer(initialState, action)[2].entityStatus).toBe('succeeded');
+    expect(todDoListsReducer(initialState, action)[2].id).toBe(
       '2f7a7720-3a82-4b62-ad48-afd516d0535f',
     );
   });

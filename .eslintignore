@@ -2,3 +2,4 @@
 *.json
 *.d.ts
 src/serviceWorker.ts
+*.test.ts

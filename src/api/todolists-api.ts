@@ -53,11 +53,13 @@ export type loginParamsType = {
   captcha?: boolean;
 };
 
+const key: string = process.env.REACT_APP_API_KEY ?? '';
+
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.1/',
   withCredentials: true,
   headers: {
-    'API-KEY': '83d8ce59-1071-4004-a943-7e866657a87e',
+    'API-KEY': key,
   },
 });
 

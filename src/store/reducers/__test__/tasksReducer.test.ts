@@ -9,10 +9,6 @@ import {
   updateTaskModelType,
 } from '../tasksReducer';
 
-import { ONE, THREE, TWO } from './constants';
-
-import { ARRAY_ELEMENT_ZERO } from 'constants/baseConstants';
-
 describe('app reducer', () => {
   let initialState: tasksType;
   let ToDoListId1: string;
@@ -86,12 +82,12 @@ describe('app reducer', () => {
 
   it('should delete task', () => {
     const action = deleteTaskAC(ToDoListId1, 'd1a0f580-bdc9-458c-9a2a-cf45ffe096d3');
-    expect(tasksReducer(initialState, action)[ToDoListId1].length).toBe(ONE);
+    expect(tasksReducer(initialState, action)[ToDoListId1].length).toBe(1);
     expect(
-      tasksReducer(initialState, action)[ToDoListId1][ARRAY_ELEMENT_ZERO].title,
+      tasksReducer(initialState, action)[ToDoListId1][0].title,
     ).toBe('lala');
     expect(
-      tasksReducer(initialState, action)[ToDoListId1][ARRAY_ELEMENT_ZERO].title,
+      tasksReducer(initialState, action)[ToDoListId1][0].title,
     ).not.toBe('d');
   });
   it('should update task', () => {
@@ -109,12 +105,12 @@ describe('app reducer', () => {
       'c4ede16b-272d-4fe6-aac9-41cc949e1145',
       task,
     );
-    expect(tasksReducer(initialState, action)[ToDoListId2].length).toBe(TWO);
+    expect(tasksReducer(initialState, action)[ToDoListId2].length).toBe(2);
     expect(
-      tasksReducer(initialState, action)[ToDoListId2][ARRAY_ELEMENT_ZERO].title,
+      tasksReducer(initialState, action)[ToDoListId2][0].title,
     ).toBe('More sleep');
     expect(
-      tasksReducer(initialState, action)[ToDoListId2][ARRAY_ELEMENT_ZERO].title,
+      tasksReducer(initialState, action)[ToDoListId2][0].title,
     ).not.toBe('Eat');
   });
   it('should add task', () => {
@@ -133,11 +129,11 @@ describe('app reducer', () => {
     };
 
     const action = addTaskAC(ToDoListId2, newTask);
-    expect(tasksReducer(initialState, action)[ToDoListId2].length).toBe(THREE);
+    expect(tasksReducer(initialState, action)[ToDoListId2].length).toBe(3);
     expect(
-      tasksReducer(initialState, action)[ToDoListId2][ARRAY_ELEMENT_ZERO].title,
+      tasksReducer(initialState, action)[ToDoListId2][0].title,
     ).toBe('New Task');
-    expect(tasksReducer(initialState, action)[ToDoListId2][ARRAY_ELEMENT_ZERO].id).toBe(
+    expect(tasksReducer(initialState, action)[ToDoListId2][0].id).toBe(
       '3',
     );
     expect(tasksReducer(initialState, action)[ToDoListId2]).toStrictEqual([
