@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { todolistAPI, updateTaskRequestModel } from '../../api/todolists-api';
-import { rootReducerType } from '../store';
+import { rootReducerType } from '../types';
 
 import { setAppStatusAC } from './appReducer';
 import {

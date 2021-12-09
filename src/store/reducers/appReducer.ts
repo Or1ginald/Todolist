@@ -20,7 +20,7 @@ export type setIsInitializedACType = ReturnType<typeof setIsInitializedAC>;
 
 type mainActionType = setStatusACType | setErrorLogACType | setIsInitializedACType;
 
-export const AppReducer = (
+export const appReducer = (
   state: AppReducerInitialStateType = AppReducerInitialState,
   action: mainActionType,
 ): AppReducerInitialStateType => {

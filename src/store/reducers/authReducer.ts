@@ -7,11 +7,11 @@ import { setAppStatusAC, setIsInitializedAC } from './appReducer';
 import { ResponseCode } from 'enums';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
-type authReducerInitStateType = typeof authReducerInitState;
+export type authReducerInitStateType = typeof authReducerInitState;
 type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>;
 type mainActionType = setIsLoggedInACType;
 
-const authReducerInitState = {
+export const authReducerInitState = {
   isLoggedIn: false,
 };
 

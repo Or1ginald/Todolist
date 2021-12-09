@@ -16,13 +16,10 @@ type TaskPropsType = {
   id: string;
   status: TaskStatuses;
   title: string;
-  // onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
 };
 
 export const Task = React.memo((props: TaskPropsType) => {
-  // debugger
   const { id, title, status } = props;
-  // console.log("one task render")
 
   const dispatch = useDispatch();
 

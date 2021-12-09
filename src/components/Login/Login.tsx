@@ -9,11 +9,12 @@ import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { useAppSelector } from '../../hooks';
+import { getAuthState } from '../../store';
 import { loginTC } from '../../store/reducers/authReducer';
-import { rootReducerType } from '../../store/store';
 
 import { ReturnComponentType } from 'types';
 
@@ -28,9 +29,7 @@ type FormikErrorType = {
 export const Login = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector<rootReducerType, boolean>(
-    store => store.auth.isLoggedIn,
-  );
+  const { isLoggedIn } = useAppSelector(getAuthState);
 
   const twoSymbols: number = 2;
 

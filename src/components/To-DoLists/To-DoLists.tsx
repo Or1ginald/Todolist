@@ -2,24 +2,22 @@ import React, { useCallback, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper/Paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { addToDoListTC, setTodosTC } from '../../store/reducers/todolistsReducer';
-import { rootReducerType } from '../../store/store';
 
 import { InputPlusButton, ToDoList } from 'components';
+import { useAppSelector } from 'hooks';
+import { getAuthState, getTasks, getToDoLists } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const ToDoLists = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
-  const { toDoLists, tasks } = useSelector<rootReducerType, rootReducerType>(
-    store => store,
-  );
-  const isLoggedIn = useSelector<rootReducerType, boolean>(
-    store => store.auth.isLoggedIn,
-  );
+  const toDoLists = useAppSelector(getToDoLists);
+  const tasks = useAppSelector(getTasks);
+  const { isLoggedIn } = useAppSelector(getAuthState);
 
   useEffect(() => {
     if (!isLoggedIn) {

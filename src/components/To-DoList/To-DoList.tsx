@@ -28,7 +28,7 @@ type ToDoListPropsType = {
 
 export const ToDoList = React.memo((props: ToDoListPropsType) => {
   const dispatch = useDispatch();
-  // const tasks = useSelector<rootReducerType, tasksType>(store => store.tasks)
+
   useEffect(() => {
     dispatch(setTasksTC(props.toDoListId));
   }, [dispatch, props.toDoListId]);

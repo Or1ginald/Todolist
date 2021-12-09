@@ -2,20 +2,17 @@ import React, { memo } from 'react';
 
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar/Snackbar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {
-  AppReducerInitialStateType,
-  setErrorLogAC,
-} from '../../store/reducers/appReducer';
-import { rootReducerType } from '../../store/store';
+import { setErrorLogAC } from '../../store/reducers/appReducer';
+
+import { useAppSelector } from 'hooks';
+import { getAppState } from 'store';
 
 export const ErrorSnackBar = memo(() => {
   const dispatch = useDispatch();
 
-  const app = useSelector<rootReducerType, AppReducerInitialStateType>(
-    store => store.app,
-  );
+  const app = useAppSelector(getAppState);
 
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
     // eslint-disable-next-line react/jsx-props-no-spreading

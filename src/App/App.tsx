@@ -7,21 +7,19 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container/Container';
 import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { AppReducerInitialStateType } from '../store/reducers/appReducer';
 import { authMeTC, logOutTC } from '../store/reducers/authReducer';
-import { rootReducerType } from '../store/store';
 
 import { Login, ToDoLists, ErrorSnackBar } from 'components';
+import { useAppSelector } from 'hooks';
+import { getAppState } from 'store';
 
 export const App = React.memo(() => {
   const dispatch = useDispatch();
 
-  const app = useSelector<rootReducerType, AppReducerInitialStateType>(
-    store => store.app,
-  );
+  const app = useAppSelector(getAppState);
   // const isLoggedIn = useSelector<rootReducerType, boolean>(store => store.auth.isLoggedIn)
 
   useEffect(() => {
