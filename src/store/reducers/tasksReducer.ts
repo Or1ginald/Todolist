@@ -14,7 +14,7 @@ export const tasksReducer = (
       //     return {...store, [el.id]: []}
       // })
       const copyState = { ...state };
-      action.todos.forEach((el: any) => {
+      action.todos.forEach(el => {
         copyState[el.id] = [];
       });
       return copyState;

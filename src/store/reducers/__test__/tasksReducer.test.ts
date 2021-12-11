@@ -7,7 +7,7 @@ import {
   taskType,
   updateTaskAC,
   updateTaskModelType,
-} from '../tasksReducer';
+} from 'store';
 
 describe('app reducer', () => {
   let initialState: tasksType;

@@ -42,7 +42,7 @@ export const todDoListsReducer = (
       );
     }
     case 'TO-DO_LISTS/SET_TODOS': {
-      return action.todos.map((el: any) => ({
+      return action.todos.map(el => ({
         ...el,
         filter: 'All',
         entityStatus: 'idle',

@@ -4,9 +4,9 @@ import {
   setAppStatusAC,
   setErrorLogAC,
   setIsInitializedAC,
-} from '../appReducer';
+} from 'store';
 
-const initialState: AppReducerInitialStateType = {
+const initialState: appReducerInitialStateType = {
   status: 'idle',
   errorLog: null,
   isInitialized: false,

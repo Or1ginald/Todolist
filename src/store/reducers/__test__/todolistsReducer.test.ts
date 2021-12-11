@@ -7,10 +7,10 @@ import {
   setTodosAC,
   todDoListsReducer,
   todDoListsType,
-} from '../todolistsReducer';
+} from 'store';
 
 describe('app reducer', () => {
-  let initialState: Array<todDoListsType>;
+  let initialState: todDoListsType;
 
   beforeEach(() => {
     initialState = [
