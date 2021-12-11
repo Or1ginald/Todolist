@@ -10,11 +10,9 @@ import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
 import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { authMeTC, logOutTC } from '../store/reducers/authReducer';
-
 import { Login, ToDoLists, ErrorSnackBar } from 'components';
 import { useAppSelector } from 'hooks';
-import { getAppState } from 'store';
+import { authMeTC, getAppState, logOutTC } from 'store';
 
 export const App = React.memo(() => {
   const dispatch = useDispatch();

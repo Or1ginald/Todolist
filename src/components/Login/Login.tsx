@@ -12,10 +12,8 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
-import { getAuthState } from '../../store';
-import { loginTC } from '../../store/reducers/authReducer';
-
+import { useAppSelector } from 'hooks';
+import { getAuthState, loginTC } from 'store';
 import { ReturnComponentType } from 'types';
 
 /* eslint-disable react/jsx-props-no-spreading */

@@ -5,11 +5,9 @@ import Paper from '@mui/material/Paper/Paper';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { addToDoListTC, setTodosTC } from '../../store/reducers/todolistsReducer';
-
 import { InputPlusButton, ToDoList } from 'components';
 import { useAppSelector } from 'hooks';
-import { getAuthState, getTasks, getToDoLists } from 'store';
+import { addToDoListTC, setTodosTC, getAuthState, getTasks, getToDoLists } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const ToDoLists = (): ReturnComponentType => {

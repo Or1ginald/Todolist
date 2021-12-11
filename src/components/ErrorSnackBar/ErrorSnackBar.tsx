@@ -4,10 +4,8 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar/Snackbar';
 import { useDispatch } from 'react-redux';
 
-import { setErrorLogAC } from '../../store/reducers/appReducer';
-
 import { useAppSelector } from 'hooks';
-import { getAppState } from 'store';
+import { setErrorLogAC, getAppState } from 'store';
 
 export const ErrorSnackBar = memo(() => {
   const dispatch = useDispatch();

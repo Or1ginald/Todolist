@@ -6,11 +6,11 @@ import {
   editToDoListTitleAC,
   setTodosAC,
   todDoListsReducer,
-  ToDoListsType,
+  todDoListsType,
 } from '../todolistsReducer';
 
 describe('app reducer', () => {
-  let initialState: Array<ToDoListsType>;
+  let initialState: Array<todDoListsType>;
 
   beforeEach(() => {
     initialState = [

@@ -1,6 +1,6 @@
 import {
   appReducer,
-  AppReducerInitialStateType,
+  appReducerInitialStateType,
   setAppStatusAC,
   setErrorLogAC,
   setIsInitializedAC,

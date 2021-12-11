@@ -7,16 +7,18 @@ import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
 import { TaskStatuses } from '../../api/todolists-api';
-import { requestStatusType } from '../../store/reducers/appReducer';
-import { addTaskTC, setTasksTC, taskType } from '../../store/reducers/tasksReducer';
-import {
-  changeToDoListFilterAC,
-  deleteToDoListTC,
-  editToDoListTitleTC,
-  filterType,
-} from '../../store/reducers/todolistsReducer';
 
 import { ChangeText, InputPlusButton, Task } from 'components';
+import {
+  changeToDoListFilterAC,
+  filterType,
+  taskType,
+  addTaskTC,
+  deleteToDoListTC,
+  editToDoListTitleTC,
+  setTasksTC,
+} from 'store';
+import { requestStatusType } from 'types';
 
 type ToDoListPropsType = {
   toDoListId: string;

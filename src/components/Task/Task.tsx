@@ -7,9 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 
 import { TaskStatuses } from '../../api/todolists-api';
-import { deleteTaskTC, updateTaskTC } from '../../store/reducers/tasksReducer';
 
 import { ChangeText } from 'components';
+import { deleteTaskTC, updateTaskTC } from 'store';
 
 type TaskPropsType = {
   toDoListId: string;

@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { taskType } from '../store/reducers/tasksReducer';
-
+import { taskType } from 'store';
 import { Nullable } from 'types';
 
 export type TodolistType = {
