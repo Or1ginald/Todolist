@@ -51,7 +51,6 @@ export const App = React.memo(() => {
       <Container fixed>
         <Routes>
           <Route path="/" element={<ToDoLists />} />
-          <Route path="/todolist" element={<ToDoLists />} />
           <Route path="/login" element={<Login />} />
           <Route path="/404" element={<h1>404</h1>} />
           <Route path="*" element={<Navigate to="/404" />} />
