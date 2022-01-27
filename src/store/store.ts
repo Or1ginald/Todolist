@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-// export const store = createStore(rootReducer, applyMiddleware(thunk));
+// export const store = createStore(rootReduce<r, applyMiddleware(thunk));
 
 const composeEnhancers =
   // @ts-ignore
@@ -18,10 +18,7 @@ const composeEnhancers =
     // @ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })) ||
   compose;
-export const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk)),
-);
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 // @ts-ignore
 window.store = store;
