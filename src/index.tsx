@@ -12,7 +12,7 @@ import { store } from './store/store';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="todolist">
         <App />
       </BrowserRouter>
     </Provider>
