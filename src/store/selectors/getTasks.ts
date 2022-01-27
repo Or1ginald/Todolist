@@ -1,5 +1,5 @@
-import { rootStateType } from '../types';
+import { RootStateType } from '../types';
 
 import { tasksType } from 'store';
 
-export const getTasks = (state: rootStateType): tasksType => state.tasks;
+export const getTasks = (state: RootStateType): tasksType => state.tasks;

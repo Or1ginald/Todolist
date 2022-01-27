@@ -17,19 +17,19 @@ export type ResponseType<D = {}> = {
   data: D;
 };
 
-type userParamsType = {
+type UserParamsType = {
   id: number;
   email: string;
   login: string;
 };
 
-type getTasksResponseType = {
+type GetTasksResponseType = {
   error: string;
   totalCount: number;
   items: Array<taskType>;
 };
 
-export type updateTaskRequestModel = {
+export type UpdateTaskRequestModel = {
   title: string;
   description: Nullable<string>;
   status: TaskStatuses;
@@ -45,7 +45,7 @@ export enum TaskStatuses {
   // Draft = 3
 }
 
-export type loginParamsType = {
+export type LoginParamsType = {
   email: string;
   password: string;
   rememberMe: boolean;
@@ -82,7 +82,7 @@ export const todolistAPI = {
     );
   },
   getTasks(todolistId: string) {
-    return instance.get<getTasksResponseType>(`todo-lists/${todolistId}/tasks`);
+    return instance.get<GetTasksResponseType>(`todo-lists/${todolistId}/tasks`);
   },
   createTask(todolistId: string, title: string) {
     return instance.post<
@@ -93,9 +93,9 @@ export const todolistAPI = {
   deleteTask(todolistId: string, taskId: string) {
     return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
   },
-  updateTask(todolistId: string, taskId: string, model: updateTaskRequestModel) {
+  updateTask(todolistId: string, taskId: string, model: UpdateTaskRequestModel) {
     return instance.put<
-      updateTaskRequestModel,
+      UpdateTaskRequestModel,
       AxiosResponse<ResponseType<{ item: taskType }>>
     >(`todo-lists/${todolistId}/tasks/${taskId}`, model);
   },
@@ -104,7 +104,7 @@ export const todolistAPI = {
 export const authAPI = {
   login(email: string, password: string, rememberMe: boolean) {
     return instance.post<
-      loginParamsType,
+      LoginParamsType,
       AxiosResponse<ResponseType<{ userId: number }>>
     >('auth/login', {
       email,
@@ -113,7 +113,7 @@ export const authAPI = {
     });
   },
   me() {
-    return instance.get<ResponseType<userParamsType>>('auth/me');
+    return instance.get<ResponseType<UserParamsType>>('auth/me');
   },
   logOut() {
     return instance.delete<ResponseType>('auth/login');

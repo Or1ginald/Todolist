@@ -1,5 +1,5 @@
-import { rootStateType } from '../types';
+import { RootStateType } from '../types';
 
 import { todDoListsType } from 'store';
 
-export const getToDoLists = (state: rootStateType): todDoListsType => state.toDoLists;
+export const getToDoLists = (state: RootStateType): todDoListsType => state.toDoLists;

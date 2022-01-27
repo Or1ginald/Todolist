@@ -1,12 +1,12 @@
 import { Dispatch } from 'redux';
 
-import { authAPI, loginParamsType } from '../../../api/todolists-api';
+import { authAPI, LoginParamsType } from '../../../api/todolists-api';
 
 import { ResponseCode } from 'enums';
 import { setAppStatusAC, setIsLoggedInAC } from 'store';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
-export const loginTC = (data: loginParamsType) => (dispatch: Dispatch) => {
+export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC('loading'));
   authAPI
     .login(data.email, data.password, data.rememberMe)

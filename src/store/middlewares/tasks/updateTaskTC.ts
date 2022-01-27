@@ -1,19 +1,19 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI, updateTaskRequestModel } from '../../../api/todolists-api';
+import { todolistAPI, UpdateTaskRequestModel } from '../../../api/todolists-api';
 
 import { ResponseCode } from 'enums';
 import {
   setAppStatusAC,
   updateTaskAC,
   updateTaskModelType,
-  rootReducerType,
+  RootReducerType,
 } from 'store';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const updateTaskTC =
   (todolistId: string, taskId: string, model: updateTaskModelType) =>
-  (dispatch: Dispatch, getState: () => rootReducerType) => {
+  (dispatch: Dispatch, getState: () => RootReducerType) => {
     dispatch(setAppStatusAC('loading'));
     const state = getState();
     const task = state.tasks[todolistId].find(el => el.id === taskId);
@@ -22,7 +22,7 @@ export const updateTaskTC =
       console.warn('task not found in the store');
       return;
     }
-    const apiModel: updateTaskRequestModel = {
+    const apiModel: UpdateTaskRequestModel = {
       title: task.title,
       deadline: task.deadline,
       description: task.description,

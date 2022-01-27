@@ -1,6 +1,6 @@
-import { rootStateType } from '../types';
+import { RootStateType } from '../types';
 
 import { appReducerInitialStateType } from 'store';
 
-export const getAppState = (state: rootStateType): appReducerInitialStateType =>
+export const getAppState = (state: RootStateType): appReducerInitialStateType =>
   state.app;
