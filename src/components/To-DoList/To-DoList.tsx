@@ -10,7 +10,7 @@ import { TaskStatuses } from '../../api/todolists-api';
 
 import { ChangeText, InputPlusButton, Task } from 'components';
 import {
-  changeToDoListFilterAC,
+  changeToDoListFilter,
   filterType,
   taskType,
   addTaskTC,
@@ -39,7 +39,7 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
 
   const onFilterButtonClick = useCallback(
     (filter: filterType): void => {
-      dispatch(changeToDoListFilterAC(props.toDoListId, filter));
+      dispatch(changeToDoListFilter({ todolistID: props.toDoListId, filter }));
     },
     [dispatch, props.toDoListId],
   );

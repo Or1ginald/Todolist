@@ -1,17 +1,16 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI } from '../../../api/todolists-api';
-
-import { setAppStatusAC, setTodosAC } from 'store';
+import { todolistAPI } from 'api/todolists-api';
+import { setAppStatus, setTodos } from 'store';
 import { handleServerNetworkError } from 'utils';
 
 export const setTodosTC = (dispatch: Dispatch): void => {
-  dispatch(setAppStatusAC('loading'));
+  dispatch(setAppStatus('loading'));
   todolistAPI
     .getTodolists()
     .then(res => {
-      dispatch(setTodosAC(res.data));
-      dispatch(setAppStatusAC('succeeded'));
+      dispatch(setTodos(res.data));
+      dispatch(setAppStatus('succeeded'));
     })
     .catch(error => {
       handleServerNetworkError(error, dispatch);

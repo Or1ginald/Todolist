@@ -1,13 +1,12 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI } from '../../../api/todolists-api';
-
-import { setAppStatusAC, setTasksAC } from 'store';
+import { todolistAPI } from 'api/todolists-api';
+import { setAppStatus, setTasks } from 'store';
 
 export const setTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC('loading'));
+  dispatch(setAppStatus('loading'));
   todolistAPI.getTasks(todolistId).then(res => {
-    dispatch(setTasksAC(res.data.items, todolistId));
-    dispatch(setAppStatusAC('succeeded'));
+    dispatch(setTasks({ tasks: res.data.items, todolistId }));
+    dispatch(setAppStatus('succeeded'));
   });
 };

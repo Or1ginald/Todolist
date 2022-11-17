@@ -1,12 +1,3 @@
-import {
-  addToDoListACType,
-  deleteToDoListACType,
-  setTodosACType,
-  addTaskACType,
-  deleteTaskACType,
-  setTasksACType,
-  updateTaskACType,
-} from 'store';
 import { Nullable } from 'types';
 
 export type tasksType = {
@@ -27,11 +18,11 @@ export type taskType = {
   addedDate: Nullable<string>;
 };
 
-export type tasksReducerActionType =
-  | deleteTaskACType
-  | updateTaskACType
-  | addTaskACType
-  | addToDoListACType
-  | deleteToDoListACType
-  | setTodosACType
-  | setTasksACType;
+export type updateTaskModelType = {
+  title?: string;
+  description?: Nullable<string>;
+  status?: number;
+  priority?: number;
+  startDate?: Nullable<string>;
+  deadline?: Nullable<string>;
+};

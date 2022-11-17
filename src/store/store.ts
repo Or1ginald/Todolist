@@ -1,24 +1,31 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-import { appReducer, authReducer, tasksReducer, todDoListsReducer } from 'store';
+import {
+  appReducerRtk,
+  authReducerRtk,
+  tasksReducerRtk,
+  todoListReducerRtk,
+} from './rtkReducers';
+
+// ...
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
 
 export const rootReducer = combineReducers({
-  tasks: tasksReducer,
-  toDoLists: todDoListsReducer,
-  app: appReducer,
-  auth: authReducer,
+  tasks: tasksReducerRtk,
+  toDoLists: todoListReducerRtk,
+  app: appReducerRtk,
+  auth: authReducerRtk,
 });
 
-// export const store = createStore(rootReduce<r, applyMiddleware(thunk));
-
-const composeEnhancers =
-  // @ts-ignore
-  (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    // @ts-ignore
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })) ||
-  compose;
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
+});
 
 // @ts-ignore
 window.store = store;

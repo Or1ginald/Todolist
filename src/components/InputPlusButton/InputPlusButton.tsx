@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import s from './InputPlusButton.module.css';
 
 import { ErrorSnackBar } from 'components';
-import { setErrorLogAC } from 'store';
+import { setErrorLog } from 'store';
 import { Nullable } from 'types';
 
 type InputPropsType = {
@@ -33,7 +33,7 @@ export const InputPlusButton = React.memo((props: InputPropsType) => {
       setInpVal('');
     } else {
       setError('Incorrect input');
-      dispatch(setErrorLogAC('Input should has at least one symbol except backspace'));
+      dispatch(setErrorLog('Input should has at least one symbol except backspace'));
     }
   }, [addCallBack, dispatch, inputValue]);
 

@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar/Snackbar';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from 'hooks';
-import { setErrorLogAC, getAppState } from 'store';
+import { setErrorLog, getAppState } from 'store';
 
 export const ErrorSnackBar = memo(() => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export const ErrorSnackBar = memo(() => {
       return;
     }
 
-    dispatch(setErrorLogAC(null));
+    dispatch(setErrorLog(null));
   };
 
   return (

@@ -27,6 +27,7 @@
     "no-shadow": "off",
     "no-alert": "error",
     "no-debugger": "error",
+    "no-param-reassign": "off",
     "no-plusplus": "error",
     "no-unused-vars": "off",
     "no-magic-numbers": "off",

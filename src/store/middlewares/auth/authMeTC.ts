@@ -3,20 +3,21 @@ import { Dispatch } from 'redux';
 import { authAPI } from '../../../api/todolists-api';
 
 import { ResponseCode } from 'enums';
-import { setAppStatusAC, setIsInitializedAC, setIsLoggedInAC } from 'store';
+import { setAppStatus, setIsInitialized } from 'store';
+import { setIsLoggedIn } from 'store/rtkReducers';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const authMeTC = () => (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC('loading'));
+  dispatch(setAppStatus('loading'));
   authAPI
     .me()
     .then(res => {
       if (res.data.resultCode === ResponseCode.Success) {
-        dispatch(setIsLoggedInAC(true));
-        dispatch(setAppStatusAC('succeeded'));
+        dispatch(setIsLoggedIn(true));
+        dispatch(setAppStatus('succeeded'));
       }
       if (res.data.resultCode === ResponseCode.Failed) {
-        dispatch(setIsLoggedInAC(false));
+        dispatch(setIsLoggedIn(false));
         handleServerAppError(res.data, dispatch);
       }
     })
@@ -24,6 +25,6 @@ export const authMeTC = () => (dispatch: Dispatch) => {
       handleServerNetworkError(error, dispatch);
     })
     .finally(() => {
-      dispatch(setIsInitializedAC(true));
+      dispatch(setIsInitialized(true));
     });
 };

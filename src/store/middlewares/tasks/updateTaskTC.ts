@@ -1,20 +1,14 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI, UpdateTaskRequestModel } from '../../../api/todolists-api';
-
+import { todolistAPI, UpdateTaskRequestModel } from 'api/todolists-api';
 import { ResponseCode } from 'enums';
-import {
-  setAppStatusAC,
-  updateTaskAC,
-  updateTaskModelType,
-  RootReducerType,
-} from 'store';
+import { setAppStatus, updateTask, updateTaskModelType, RootReducerType } from 'store';
 import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const updateTaskTC =
   (todolistId: string, taskId: string, model: updateTaskModelType) =>
   (dispatch: Dispatch, getState: () => RootReducerType) => {
-    dispatch(setAppStatusAC('loading'));
+    dispatch(setAppStatus('loading'));
     const state = getState();
     const task = state.tasks[todolistId].find(el => el.id === taskId);
     if (!task) {
@@ -35,8 +29,8 @@ export const updateTaskTC =
       .updateTask(todolistId, taskId, apiModel)
       .then(res => {
         if (res.data.resultCode === ResponseCode.Success) {
-          dispatch(updateTaskAC(todolistId, taskId, res.data.data.item));
-          dispatch(setAppStatusAC('succeeded'));
+          dispatch(updateTask({ todolistId, taskId, task: res.data.data.item }));
+          dispatch(setAppStatus('succeeded'));
         }
         if (res.data.resultCode === ResponseCode.Failed) {
           handleServerAppError(res.data, dispatch);
